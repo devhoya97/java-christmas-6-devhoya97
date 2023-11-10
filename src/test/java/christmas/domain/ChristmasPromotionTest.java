@@ -8,14 +8,14 @@ import org.junit.jupiter.params.provider.CsvSource;
 
 class ChristmasPromotionTest {
 
-    @DisplayName("날짜와 금액을 기반으로 크리스마스 이벤트 조건을 충족하는지 판단한다.")
+    @DisplayName("크리스마스 이벤트를 적용한 금액을 계산한다.")
     @ParameterizedTest
-    @CsvSource({"0,20000,false", "1,5000,false", "15,10000,true"})
-    void canReceive(int day, int totalPrice, boolean expectedResult) {
+    @CsvSource({"1,10000,9000", "25,10000,6600", "0,10000,10000, 26,10000,10000"})
+    void canReceive(int day, int totalPrice, int expectedResult) {
         // given
         ChristmasPromotion christmasPromotion = new ChristmasPromotion(day, totalPrice);
         // when
-        boolean canReceivePromotion = christmasPromotion.canReceive();;
-        assertThat(canReceivePromotion).isEqualTo(expectedResult);
+        int promotionAppliedPrice = christmasPromotion.calculateDiscountedPrice();
+        assertThat(promotionAppliedPrice).isEqualTo(expectedResult);
     }
 }
