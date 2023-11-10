@@ -45,4 +45,9 @@ public class OrderItem {
     public boolean isNotDrink() {
         return !(DRINK.equals(menu.getKind()));
     }
+
+    @Override
+    public String toString() {
+        return menu.getName() + " " + number + "개";
+    }
 }
