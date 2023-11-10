@@ -6,8 +6,9 @@ import static christmas.domain.utils.ErrorMessage.MIN_ORDER_ITEM_ERROR;
 import christmas.domain.menu.Menu;
 
 public class OrderItem {
-    private static final String DESSERT = "디저트";
     private static final String MAIN = "메인";
+    private static final String DESSERT = "디저트";
+    private static final String DRINK = "음료";
     private static final int MIN_ORDER_ITEM_NUMBER = 1;
 
     private final Menu menu;
@@ -33,11 +34,15 @@ public class OrderItem {
         return totalOrderItems + number;
     }
 
+    public boolean isMain() {
+        return MAIN.equals(menu.getKind());
+    }
+
     public boolean isDessert() {
         return DESSERT.equals(menu.getKind());
     }
 
-    public boolean isMain() {
-        return MAIN.equals(menu.getKind());
+    public boolean isNotDrink() {
+        return !(DRINK.equals(menu.getKind()));
     }
 }

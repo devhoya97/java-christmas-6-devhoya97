@@ -1,6 +1,7 @@
 package christmas.domain;
 
 import static christmas.domain.utils.ErrorMessage.MAX_ORDER_ITEMS_ERROR;
+import static christmas.domain.utils.ErrorMessage.ONLY_DRINK_ERROR;
 
 import java.util.List;
 
@@ -21,6 +22,15 @@ public class Order {
         if (totalOrderItems > MAX_TOTAL_ORDER_ITEMS) {
             throw new IllegalArgumentException(
                     String.format(MAX_ORDER_ITEMS_ERROR, MAX_TOTAL_ORDER_ITEMS));
+        }
+    }
+
+    private void validateNotOnlyDrink(List<OrderItem> orderItems) {
+        long notDrinkCount = orderItems.stream()
+                .filter(OrderItem::isNotDrink)
+                .count();
+        if (notDrinkCount == 0) {
+            throw new IllegalArgumentException(ONLY_DRINK_ERROR);
         }
     }
 
