@@ -23,4 +23,8 @@ public class Order {
     public long calculatePrice() {
         return menu.getPrice() * number;
     }
+
+    public int getNumber() {
+        return number;
+    }
 }
