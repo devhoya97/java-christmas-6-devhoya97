@@ -1,4 +1,7 @@
-package christmas.domain;
+package christmas.domain.promotion;
+
+import christmas.domain.Order;
+import christmas.domain.VisitDay;
 
 public class WeekDayPromotion {
     private static final long MIN_TOTAL_PRICE = 10000;

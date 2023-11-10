@@ -1,4 +1,6 @@
-package christmas.domain;
+package christmas.domain.promotion;
+
+import christmas.domain.VisitDay;
 
 public class ChristmasPromotion {
     private static final int START_DAY = 1;
