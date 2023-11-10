@@ -25,4 +25,9 @@ public class VisitDay {
     public boolean isInChristmasPromotion() {
         return visitDay <= CHRISTMAS;
     }
+
+    public boolean isInWeekendPromotion() {
+        int remain = visitDay % WEEK_SIZE;
+        return (remain == FRIDAY_REMAIN) || (remain == SATURDAY_REMAIN);
+    }
 }
