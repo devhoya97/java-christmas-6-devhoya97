@@ -39,4 +39,8 @@ public class VisitDay {
         int remain = visitDay % WEEK_SIZE;
         return (remain == SUNDAY_REMAIN) || (visitDay == CHRISTMAS);
     }
+
+    public int getDifferenceFromMinDay() {
+        return visitDay - MIN_DAY;
+    }
 }
