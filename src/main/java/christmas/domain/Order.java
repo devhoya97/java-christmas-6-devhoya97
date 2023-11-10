@@ -1,11 +1,11 @@
 package christmas.domain;
 
-import static christmas.domain.utils.ConstantValue.MAX_TOTAL_ORDER_ITEMS;
 import static christmas.domain.utils.ErrorMessage.MAX_ORDER_ITEMS_ERROR;
 
 import java.util.List;
 
 public class Order {
+    public static final int MAX_TOTAL_ORDER_ITEMS = 20;
     List<OrderItem> orderItems;
 
     public Order(List<OrderItem> orderItems) {

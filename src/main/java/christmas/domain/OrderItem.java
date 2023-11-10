@@ -1,12 +1,13 @@
 package christmas.domain;
 
 
-import static christmas.domain.utils.ConstantValue.MIN_ORDER_ITEM_NUMBER;
 import static christmas.domain.utils.ErrorMessage.MIN_ORDER_ITEM_ERROR;
 
 import christmas.domain.menu.Menu;
 
 public class OrderItem {
+    public static final int MIN_ORDER_ITEM_NUMBER = 1;
+
     private final Menu menu;
     private final int number;
 
