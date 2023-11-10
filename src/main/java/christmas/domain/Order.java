@@ -16,7 +16,7 @@ public class Order {
     private void validateTotalOrderNumber(List<OrderItem> orderItems) {
         int totalOrderItems = 0;
         for (OrderItem orderItem : orderItems) {
-            totalOrderItems = orderItem.accumulate(totalOrderItems);
+            totalOrderItems = orderItem.accumulateNumber(totalOrderItems);
         }
         if (totalOrderItems > MAX_TOTAL_ORDER_ITEMS) {
             throw new IllegalArgumentException(
