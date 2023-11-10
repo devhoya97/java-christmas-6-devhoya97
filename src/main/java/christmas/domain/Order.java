@@ -14,9 +14,10 @@ public class Order {
     }
 
     private void validateTotalOrderNumber(List<OrderItem> orderItems) {
-        int totalOrderItems = orderItems.stream()
-                .mapToInt(OrderItem::getNumber)
-                .sum();
+        int totalOrderItems = 0;
+        for (OrderItem orderItem : orderItems) {
+            totalOrderItems = orderItem.accumulate(totalOrderItems);
+        }
         if (totalOrderItems > MAX_TOTAL_ORDER_ITEMS) {
             throw new IllegalArgumentException(
                     String.format(MAX_ORDER_ITEMS_ERROR, MAX_TOTAL_ORDER_ITEMS));

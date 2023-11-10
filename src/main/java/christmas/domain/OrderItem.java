@@ -27,7 +27,7 @@ public class OrderItem {
         return menu.getPrice() * number;
     }
 
-    public int getNumber() {
-        return number;
+    public int accumulate(int totalOrderItems) {
+        return totalOrderItems + number;
     }
 }
