@@ -21,4 +21,8 @@ public class VisitDay {
             throw new IllegalArgumentException(String.format(DAY_OUT_OF_RANGE_ERROR, MIN_DAY, MAX_DAY));
         }
     }
+
+    public boolean isInChristmasPromotion() {
+        return visitDay <= CHRISTMAS;
+    }
 }
