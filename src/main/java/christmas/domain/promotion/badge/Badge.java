@@ -1,4 +1,4 @@
-package christmas.domain.promotion.present;
+package christmas.domain.promotion.badge;
 
 public enum Badge {
     STAR("별", 5000),

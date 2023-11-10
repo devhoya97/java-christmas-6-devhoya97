@@ -1,4 +1,4 @@
-package christmas.domain.promotion.present;
+package christmas.domain.promotion.badge;
 
 public class BadgePromotion {
     private final long totalDiscount;
