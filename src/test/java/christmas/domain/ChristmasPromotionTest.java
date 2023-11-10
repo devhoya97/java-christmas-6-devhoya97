@@ -11,12 +11,12 @@ class ChristmasPromotionTest {
     @DisplayName("크리스마스 이벤트로 할인 받은 금액을 계산한다.")
     @ParameterizedTest
     @CsvSource({"1,10000,1000", "25,10000,3400", "26,10000,0"})
-    void calculateDiscount(int day, int totalPrice, int expectedResult) {
+    void calculateDiscount(int day, long totalPrice, long expectedResult) {
         // given
         VisitDay visitDay = new VisitDay(day);
         ChristmasPromotion christmasPromotion = new ChristmasPromotion(visitDay, totalPrice);
         // when
-        int discount = christmasPromotion.calculateDiscount();
+        long discount = christmasPromotion.calculateDiscount();
         // then
         assertThat(discount).isEqualTo(expectedResult);
     }
