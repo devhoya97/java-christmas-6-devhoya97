@@ -43,4 +43,9 @@ public class VisitDate {
     public int getDifferenceFromMinDay() {
         return visitDate - MIN_DAY;
     }
+
+    @Override
+    public String toString() {
+        return String.valueOf(visitDate);
+    }
 }
