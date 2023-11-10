@@ -1,5 +1,7 @@
 package christmas.domain;
 
+import static christmas.domain.utils.ConstantValue.MAX_TOTAL_ORDER_ITEMS;
+import static christmas.domain.utils.ErrorMessage.MAX_ORDER_ITEMS_ERROR;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 import christmas.domain.menu.Appetizer;
@@ -24,6 +26,6 @@ class OrderTest {
         // then
         assertThatThrownBy(() -> new Order(List.of(tapas, christmasPasta, chocoCake, zeroCoke)))
                 .isInstanceOf(IllegalArgumentException.class)
-                .hasMessageContaining(String.format("[ERROR] 주문한 메뉴당 개수의 총합은 최대 %d개까지 가능합니다.", 20));
+                .hasMessageContaining(String.format(MAX_ORDER_ITEMS_ERROR, MAX_TOTAL_ORDER_ITEMS));
     }
 }

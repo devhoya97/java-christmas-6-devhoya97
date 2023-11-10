@@ -1,5 +1,7 @@
 package christmas.domain;
 
+import static christmas.domain.utils.ConstantValue.MIN_ORDER_ITEM_NUMBER;
+import static christmas.domain.utils.ErrorMessage.MIN_ORDER_ITEM_ERROR;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -18,7 +20,7 @@ class OrderItemTest {
     void createOrderByLessThanOne(int number) {
         assertThatThrownBy(() -> new OrderItem(Main.BBQ_RIBS, number))
                 .isInstanceOf(IllegalArgumentException.class)
-                .hasMessageContaining(String.format("[ERROR] 주문 가능한 최소 메뉴 개수는 %d개 입니다.", 1));
+                .hasMessageContaining(String.format(MIN_ORDER_ITEM_ERROR, MIN_ORDER_ITEM_NUMBER));
     }
 
     @DisplayName("주문 받은 메뉴와 개수를 고려하여 주문의 가격을 계산한다.")
