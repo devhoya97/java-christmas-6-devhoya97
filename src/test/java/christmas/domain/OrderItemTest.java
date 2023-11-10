@@ -1,17 +1,12 @@
 package christmas.domain;
 
-import static christmas.domain.utils.ErrorMessage.MIN_ORDER_ITEM_ERROR;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 import static org.assertj.core.api.Assertions.assertThat;
 
-import christmas.domain.menu.Appetizer;
-import christmas.domain.menu.Dessert;
-import christmas.domain.menu.Main;
 import christmas.domain.menu.Menu;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
-import org.junit.jupiter.params.provider.CsvSource;
 import org.junit.jupiter.params.provider.ValueSource;
 
 class OrderItemTest {
@@ -20,7 +15,7 @@ class OrderItemTest {
     @ParameterizedTest
     @ValueSource(ints = {-5, -1, 0})
     void createOrderByLessThanOne(int number) {
-        assertThatThrownBy(() -> new OrderItem(Main.BBQ_RIBS, number))
+        assertThatThrownBy(() -> new OrderItem(Menu.BBQ_RIBS, number))
                 .isInstanceOf(IllegalArgumentException.class)
                 .hasMessageContaining("[ERROR] 선택한 메뉴의 개수가 1개보다 작습니다.");
     }
@@ -29,7 +24,7 @@ class OrderItemTest {
     @Test
     void calculatePrice() {
         // given
-        OrderItem orderItem = new OrderItem(Appetizer.MUSHROOM_SOUP, 3);
+        OrderItem orderItem = new OrderItem(Menu.MUSHROOM_SOUP, 3);
         long expectedPrice = 18000;
         // when
         long price =  orderItem.calculatePrice();
@@ -41,8 +36,8 @@ class OrderItemTest {
     @Test
     void isDessert() {
         // given
-        OrderItem orderItem = new OrderItem(Dessert.CHOCO_CAKE, 1);
-        OrderItem otherOrderItem = new OrderItem(Main.CHRISTMAS_PASTA, 1);
+        OrderItem orderItem = new OrderItem(Menu.CHOCO_CAKE, 1);
+        OrderItem otherOrderItem = new OrderItem(Menu.CHRISTMAS_PASTA, 1);
         // when, then
         assertThat(orderItem.isDessert()).isEqualTo(true);
         assertThat(otherOrderItem.isDessert()).isEqualTo(false);
@@ -52,8 +47,8 @@ class OrderItemTest {
     @Test
     void isMain() {
         // given
-        OrderItem orderItem = new OrderItem(Main.BBQ_RIBS, 1);
-        OrderItem otherOrderItem = new OrderItem(Appetizer.TAPAS, 1);
+        OrderItem orderItem = new OrderItem(Menu.BBQ_RIBS, 1);
+        OrderItem otherOrderItem = new OrderItem(Menu.TAPAS, 1);
         // when, then
         assertThat(orderItem.isMain()).isEqualTo(true);
         assertThat(otherOrderItem.isMain()).isEqualTo(false);

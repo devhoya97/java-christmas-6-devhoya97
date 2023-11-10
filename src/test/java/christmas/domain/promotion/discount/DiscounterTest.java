@@ -5,10 +5,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 import christmas.domain.Order;
 import christmas.domain.OrderItem;
 import christmas.domain.VisitDate;
-import christmas.domain.menu.Appetizer;
-import christmas.domain.menu.Dessert;
-import christmas.domain.menu.Drink;
-import christmas.domain.menu.Main;
+import christmas.domain.menu.Menu;
 import java.util.List;
 import java.util.Map;
 import org.junit.jupiter.api.DisplayName;
@@ -23,12 +20,12 @@ class DiscounterTest {
     void getResult(int day, long expectedChristmasDiscount, long expectedWeekDayDiscount,
                    long expectedWeekendDiscount, long expectedSpecialDiscount, long expectedGiftDiscount) {
         // given
-        OrderItem tapas = new OrderItem(Appetizer.TAPAS, 1);
-        OrderItem christmasPasta = new OrderItem(Main.CHRISTMAS_PASTA, 2);
-        OrderItem seafoodPasta = new OrderItem(Main.SEAFOOD_PASTA, 3);
-        OrderItem chocoCake = new OrderItem(Dessert.CHOCO_CAKE, 3);
-        OrderItem iceCream = new OrderItem(Dessert.ICE_CREAM, 1);
-        OrderItem zeroCoke = new OrderItem(Drink.ZERO_COKE, 4);
+        OrderItem tapas = new OrderItem(Menu.TAPAS, 1);
+        OrderItem christmasPasta = new OrderItem(Menu.CHRISTMAS_PASTA, 2);
+        OrderItem seafoodPasta = new OrderItem(Menu.SEAFOOD_PASTA, 3);
+        OrderItem chocoCake = new OrderItem(Menu.CHOCO_CAKE, 3);
+        OrderItem iceCream = new OrderItem(Menu.ICE_CREAM, 1);
+        OrderItem zeroCoke = new OrderItem(Menu.ZERO_COKE, 4);
         Order order = new Order(List.of(tapas, christmasPasta, seafoodPasta, chocoCake, iceCream, zeroCoke));
         VisitDate visitDate = new VisitDate(day);
         Discounter discounter = new Discounter(visitDate, order);
@@ -47,12 +44,12 @@ class DiscounterTest {
     @CsvSource({"1,211385", "3,212208", "27,214408"})
     void calculateTotalDiscountedPrice(int day, long expectedResult) {
         // given
-        OrderItem tapas = new OrderItem(Appetizer.TAPAS, 1);
-        OrderItem christmasPasta = new OrderItem(Main.CHRISTMAS_PASTA, 2);
-        OrderItem seafoodPasta = new OrderItem(Main.SEAFOOD_PASTA, 3);
-        OrderItem chocoCake = new OrderItem(Dessert.CHOCO_CAKE, 3);
-        OrderItem iceCream = new OrderItem(Dessert.ICE_CREAM, 1);
-        OrderItem zeroCoke = new OrderItem(Drink.ZERO_COKE, 4);
+        OrderItem tapas = new OrderItem(Menu.TAPAS, 1);
+        OrderItem christmasPasta = new OrderItem(Menu.CHRISTMAS_PASTA, 2);
+        OrderItem seafoodPasta = new OrderItem(Menu.SEAFOOD_PASTA, 3);
+        OrderItem chocoCake = new OrderItem(Menu.CHOCO_CAKE, 3);
+        OrderItem iceCream = new OrderItem(Menu.ICE_CREAM, 1);
+        OrderItem zeroCoke = new OrderItem(Menu.ZERO_COKE, 4);
         Order order = new Order(List.of(tapas, christmasPasta, seafoodPasta, chocoCake, iceCream, zeroCoke));
         VisitDate visitDate = new VisitDate(day);
         Discounter discounter = new Discounter(visitDate, order);

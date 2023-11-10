@@ -2,7 +2,7 @@ package christmas.domain.promotion.discount;
 
 import christmas.domain.Order;
 import christmas.domain.VisitDate;
-import christmas.domain.menu.Drink;
+import christmas.domain.menu.Menu;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Map.Entry;
@@ -87,7 +87,7 @@ public class Discounter {
     private void calculateGiftDiscount() {
         long discount = NO_DISCOUNT;
         if (order.calculateTotalPrice() >= GIFT_THRESHOLD) {
-            discount = Drink.CHAMPAGNE.getPrice();
+            discount = Menu.CHAMPAGNE.getPrice();
         }
         result.put(Discount.GIFT, discount);
     }

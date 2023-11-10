@@ -3,11 +3,11 @@ package christmas.domain;
 
 import static christmas.domain.utils.ErrorMessage.MIN_ORDER_ITEM_ERROR;
 
-import christmas.domain.menu.Dessert;
-import christmas.domain.menu.Main;
 import christmas.domain.menu.Menu;
 
 public class OrderItem {
+    private static final String DESSERT = "디저트";
+    private static final String MAIN = "메인";
     private static final int MIN_ORDER_ITEM_NUMBER = 1;
 
     private final Menu menu;
@@ -34,10 +34,10 @@ public class OrderItem {
     }
 
     public boolean isDessert() {
-        return menu instanceof Dessert;
+        return DESSERT.equals(menu.getKind());
     }
 
     public boolean isMain() {
-        return menu instanceof Main;
+        return MAIN.equals(menu.getKind());
     }
 }

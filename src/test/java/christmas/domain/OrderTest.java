@@ -1,13 +1,9 @@
 package christmas.domain;
 
-import static christmas.domain.utils.ErrorMessage.MAX_ORDER_ITEMS_ERROR;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 import static org.assertj.core.api.Assertions.assertThat;
 
-import christmas.domain.menu.Appetizer;
-import christmas.domain.menu.Dessert;
-import christmas.domain.menu.Drink;
-import christmas.domain.menu.Main;
+import christmas.domain.menu.Menu;
 import java.util.List;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -18,10 +14,10 @@ class OrderTest {
     @Test
     void createOrdersOverMaxNumber() {
         // given
-        OrderItem tapas = new OrderItem(Appetizer.TAPAS, 5);
-        OrderItem christmasPasta = new OrderItem(Main.CHRISTMAS_PASTA, 5);
-        OrderItem chocoCake = new OrderItem(Dessert.CHOCO_CAKE, 5);
-        OrderItem zeroCoke = new OrderItem(Drink.ZERO_COKE, 6);
+        OrderItem tapas = new OrderItem(Menu.TAPAS, 5);
+        OrderItem christmasPasta = new OrderItem(Menu.CHRISTMAS_PASTA, 5);
+        OrderItem chocoCake = new OrderItem(Menu.CHOCO_CAKE, 5);
+        OrderItem zeroCoke = new OrderItem(Menu.ZERO_COKE, 6);
         // when, then
         assertThatThrownBy(() -> new Order(List.of(tapas, christmasPasta, chocoCake, zeroCoke)))
                 .isInstanceOf(IllegalArgumentException.class)
@@ -32,10 +28,10 @@ class OrderTest {
     @Test
     void calculateTotalPrice() {
         // given
-        OrderItem tapas = new OrderItem(Appetizer.TAPAS, 1);
-        OrderItem christmasPasta = new OrderItem(Main.CHRISTMAS_PASTA, 2);
-        OrderItem chocoCake = new OrderItem(Dessert.CHOCO_CAKE, 3);
-        OrderItem zeroCoke = new OrderItem(Drink.ZERO_COKE, 4);
+        OrderItem tapas = new OrderItem(Menu.TAPAS, 1);
+        OrderItem christmasPasta = new OrderItem(Menu.CHRISTMAS_PASTA, 2);
+        OrderItem chocoCake = new OrderItem(Menu.CHOCO_CAKE, 3);
+        OrderItem zeroCoke = new OrderItem(Menu.ZERO_COKE, 4);
         Order order = new Order(List.of(tapas, christmasPasta, chocoCake, zeroCoke));
         long expectedResult = 5500 + 50000 + 45000 + 12000;
         // when
@@ -48,11 +44,11 @@ class OrderTest {
     @Test
     void countDesserts() {
         // given
-        OrderItem tapas = new OrderItem(Appetizer.TAPAS, 1);
-        OrderItem christmasPasta = new OrderItem(Main.CHRISTMAS_PASTA, 2);
-        OrderItem chocoCake = new OrderItem(Dessert.CHOCO_CAKE, 3);
-        OrderItem iceCream = new OrderItem(Dessert.ICE_CREAM, 1);
-        OrderItem zeroCoke = new OrderItem(Drink.ZERO_COKE, 4);
+        OrderItem tapas = new OrderItem(Menu.TAPAS, 1);
+        OrderItem christmasPasta = new OrderItem(Menu.CHRISTMAS_PASTA, 2);
+        OrderItem chocoCake = new OrderItem(Menu.CHOCO_CAKE, 3);
+        OrderItem iceCream = new OrderItem(Menu.ICE_CREAM, 1);
+        OrderItem zeroCoke = new OrderItem(Menu.ZERO_COKE, 4);
         Order order = new Order(List.of(tapas, christmasPasta, chocoCake, iceCream, zeroCoke));
         long expectedResult = 4;
         // when, then
@@ -63,11 +59,11 @@ class OrderTest {
     @Test
     void countMains() {
         // given
-        OrderItem tapas = new OrderItem(Appetizer.TAPAS, 1);
-        OrderItem christmasPasta = new OrderItem(Main.CHRISTMAS_PASTA, 2);
-        OrderItem TBoneSteak = new OrderItem(Main.T_BONE_STEAK, 3);
-        OrderItem iceCream = new OrderItem(Dessert.ICE_CREAM, 1);
-        OrderItem zeroCoke = new OrderItem(Drink.ZERO_COKE, 2);
+        OrderItem tapas = new OrderItem(Menu.TAPAS, 1);
+        OrderItem christmasPasta = new OrderItem(Menu.CHRISTMAS_PASTA, 2);
+        OrderItem TBoneSteak = new OrderItem(Menu.T_BONE_STEAK, 3);
+        OrderItem iceCream = new OrderItem(Menu.ICE_CREAM, 1);
+        OrderItem zeroCoke = new OrderItem(Menu.ZERO_COKE, 2);
         Order order = new Order(List.of(tapas, christmasPasta, TBoneSteak, iceCream, zeroCoke));
         long expectedResult = 5;
         // when, then

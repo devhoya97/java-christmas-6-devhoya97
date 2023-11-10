@@ -7,7 +7,7 @@ public enum Discount {
     SPECIAL("특별 할인"),
     GIFT("증정 이벤트");
 
-    private String name;
+    private final String name;
 
     Discount(String name) {
         this.name = name;
