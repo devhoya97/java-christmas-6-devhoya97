@@ -41,4 +41,22 @@ class DiscounterTest {
         assertThat(discountResult.get(Discount.SPECIAL)).isEqualTo(expectedSpecialDiscount);
         assertThat(discountResult.get(Discount.GIFT)).isEqualTo(expectedGiftDiscount);
     }
+    
+    @DisplayName("할인 후 예상 결제 금액을 계산한다.")
+    @ParameterizedTest
+    @CsvSource({"1,211385", "3,212208", "27,214408"})
+    void calculateTotalDiscountedPrice(int day, long expectedResult) {
+        // given
+        OrderItem tapas = new OrderItem(Appetizer.TAPAS, 1);
+        OrderItem christmasPasta = new OrderItem(Main.CHRISTMAS_PASTA, 2);
+        OrderItem seafoodPasta = new OrderItem(Main.SEAFOOD_PASTA, 3);
+        OrderItem chocoCake = new OrderItem(Dessert.CHOCO_CAKE, 3);
+        OrderItem iceCream = new OrderItem(Dessert.ICE_CREAM, 1);
+        OrderItem zeroCoke = new OrderItem(Drink.ZERO_COKE, 4);
+        Order order = new Order(List.of(tapas, christmasPasta, seafoodPasta, chocoCake, iceCream, zeroCoke));
+        VisitDay visitDay = new VisitDay(day);
+        Discounter discounter = new Discounter(visitDay, order);
+        // when, then
+        assertThat(discounter.calculateTotalDiscountedPrice()).isEqualTo(expectedResult);
+    }
 }
