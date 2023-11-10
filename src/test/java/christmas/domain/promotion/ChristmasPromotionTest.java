@@ -1,7 +1,8 @@
-package christmas.domain;
+package christmas.domain.promotion;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
+import christmas.domain.VisitDay;
 import christmas.domain.promotion.ChristmasPromotion;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.params.ParameterizedTest;

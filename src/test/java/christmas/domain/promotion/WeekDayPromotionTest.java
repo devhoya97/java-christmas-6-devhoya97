@@ -1,7 +1,10 @@
-package christmas.domain;
+package christmas.domain.promotion;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
+import christmas.domain.Order;
+import christmas.domain.OrderItem;
+import christmas.domain.VisitDay;
 import christmas.domain.menu.Appetizer;
 import christmas.domain.menu.Dessert;
 import christmas.domain.menu.Drink;
