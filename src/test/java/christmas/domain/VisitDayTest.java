@@ -19,7 +19,7 @@ class VisitDayTest {
     void creatInvalidVisitDay(int visitDay) {
         assertThatThrownBy(() -> new VisitDay(visitDay))
                 .isInstanceOf(IllegalArgumentException.class)
-                .hasMessageContaining(String.format(DAY_OUT_OF_RANGE_ERROR, VisitDay.MIN_DAY, VisitDay.MAX_DAY));
+                .hasMessageContaining("[ERROR] 방문 날짜는 1일~31일 사이만 가능합니다.");
     }
 
     @DisplayName("방문 날짜가 크리스마스 이벤트 기간이 맞는지 알려준다.")

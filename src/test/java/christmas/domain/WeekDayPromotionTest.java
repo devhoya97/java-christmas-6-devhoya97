@@ -25,7 +25,7 @@ class WeekDayPromotionTest {
         Order order = new Order(List.of(tapas, christmasPasta, chocoCake, iceCream, zeroCoke));
         VisitDay visitDay = new VisitDay(14);
         WeekDayPromotion weekDayPromotion = new WeekDayPromotion(visitDay, order);
-        long expectedResult = WeekDayPromotion.DISCOUNT_PER_DESSERT * 4;
+        long expectedResult = 2023L * 4;
         // when, then
         assertThat(weekDayPromotion.calculateDiscount()).isEqualTo(expectedResult);
     }

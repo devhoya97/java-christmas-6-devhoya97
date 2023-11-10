@@ -8,7 +8,7 @@ import christmas.domain.menu.Main;
 import christmas.domain.menu.Menu;
 
 public class OrderItem {
-    public static final int MIN_ORDER_ITEM_NUMBER = 1;
+    private static final int MIN_ORDER_ITEM_NUMBER = 1;
 
     private final Menu menu;
     private final int number;

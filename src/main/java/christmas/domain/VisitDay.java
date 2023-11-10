@@ -3,8 +3,8 @@ package christmas.domain;
 import static christmas.domain.utils.ErrorMessage.DAY_OUT_OF_RANGE_ERROR;
 
 public class VisitDay {
-    public static final int MIN_DAY = 1;
-    public static final int MAX_DAY = 31;
+    private static final int MIN_DAY = 1;
+    private static final int MAX_DAY = 31;
     private static final int CHRISTMAS = 25;
     private static final int FRIDAY_REMAIN = 1;
     private static final int SATURDAY_REMAIN = 2;

@@ -25,7 +25,7 @@ class OrderTest {
         // when, then
         assertThatThrownBy(() -> new Order(List.of(tapas, christmasPasta, chocoCake, zeroCoke)))
                 .isInstanceOf(IllegalArgumentException.class)
-                .hasMessageContaining(String.format(MAX_ORDER_ITEMS_ERROR, Order.MAX_TOTAL_ORDER_ITEMS));
+                .hasMessageContaining("[ERROR] 주문한 메뉴당 개수의 총합은 최대 20개까지 가능합니다.");
     }
 
     @DisplayName("전체 주문 금액을 계산한다.")
