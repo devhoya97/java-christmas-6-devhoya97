@@ -4,6 +4,7 @@ import static org.assertj.core.api.Assertions.assertThatThrownBy;
 import static org.assertj.core.api.Assertions.assertThat;
 
 import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 import org.junit.jupiter.params.provider.ValueSource;
@@ -77,5 +78,14 @@ class VisitDateTest {
         int differenceFromMinDay = visitDate.getDifferenceFromMinDay();
         // then
         assertThat(differenceFromMinDay).isEqualTo(expectedResult);
+    }
+
+    @DisplayName("방문 날짜를 String으로 반환한다.")
+    @Test
+    void getVisitDateString() {
+        // given
+        VisitDate visitDate = new VisitDate(3);
+        // when, then
+        assertThat(visitDate.toString()).isEqualTo("3");
     }
 }
