@@ -23,4 +23,10 @@ public class Order {
                     String.format(MAX_ORDER_ITEMS_ERROR, MAX_TOTAL_ORDER_ITEMS));
         }
     }
+
+    public long calculateTotalPrice() {
+        return orderItems.stream()
+                .mapToLong(OrderItem::calculatePrice)
+                .sum();
+    }
 }
