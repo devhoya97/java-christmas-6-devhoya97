@@ -1,4 +1,2 @@
-package christmas.domain;
-
-public class Promotion {
+package christmas.domain;public interface Promotion {
 }
