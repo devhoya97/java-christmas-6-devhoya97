@@ -1,7 +1,7 @@
 package christmas.domain;
 
-import static org.assertj.core.api.Assertions.assertThatThrownBy;
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 import christmas.domain.menu.Menu;
 import java.util.List;
@@ -83,4 +83,21 @@ class OrderTest {
     }
 
     @DisplayName("주문 받은 메뉴를 new line을 기준으로 구분하여 String으로 반환한다.")
+    @Test
+    void returnFormattedString() {
+        // given
+        OrderItem tapas = new OrderItem(Menu.TAPAS, 1);
+        OrderItem christmasPasta = new OrderItem(Menu.CHRISTMAS_PASTA, 2);
+        OrderItem TBoneSteak = new OrderItem(Menu.T_BONE_STEAK, 3);
+        OrderItem iceCream = new OrderItem(Menu.ICE_CREAM, 1);
+        OrderItem zeroCoke = new OrderItem(Menu.ZERO_COKE, 2);
+        Order order = new Order(List.of(tapas, christmasPasta, TBoneSteak, iceCream, zeroCoke));
+        String expectedResult = "타파스 1개\n"
+                        + "크리스마스파스타 2개\n"
+                        + "티본스테이크 3개\n"
+                        + "아이스크림 1개\n"
+                        + "제로콜라 2개";
+        // when, then
+        assertThat(order.toString()).isEqualTo(expectedResult);
+    }
 }
