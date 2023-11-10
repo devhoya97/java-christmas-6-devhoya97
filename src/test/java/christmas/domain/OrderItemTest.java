@@ -5,10 +5,13 @@ import static org.assertj.core.api.Assertions.assertThatThrownBy;
 import static org.assertj.core.api.Assertions.assertThat;
 
 import christmas.domain.menu.Appetizer;
+import christmas.domain.menu.Dessert;
 import christmas.domain.menu.Main;
+import christmas.domain.menu.Menu;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.CsvSource;
 import org.junit.jupiter.params.provider.ValueSource;
 
 class OrderItemTest {
@@ -32,5 +35,27 @@ class OrderItemTest {
         long price =  orderItem.calculatePrice();
         // then
         assertThat(price).isEqualTo(expectedPrice);
+    }
+
+    @DisplayName("디저트 메뉴 주문인지 알려준다.")
+    @Test
+    void isDessert() {
+        // given
+        OrderItem orderItem = new OrderItem(Dessert.CHOCO_CAKE, 1);
+        OrderItem otherOrderItem = new OrderItem(Main.CHRISTMAS_PASTA, 1);
+        // when, then
+        assertThat(orderItem.isDessert()).isEqualTo(true);
+        assertThat(otherOrderItem.isDessert()).isEqualTo(false);
+    }
+
+    @DisplayName("메인 메뉴 주문인지 알려준다.")
+    @Test
+    void isMain() {
+        // given
+        OrderItem orderItem = new OrderItem(Main.BBQ_RIBS, 1);
+        OrderItem otherOrderItem = new OrderItem(Appetizer.TAPAS, 1);
+        // when, then
+        assertThat(orderItem.isMain()).isEqualTo(true);
+        assertThat(otherOrderItem.isMain()).isEqualTo(false);
     }
 }
