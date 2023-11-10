@@ -41,7 +41,7 @@ class DiscounterTest {
         assertThat(discountResult.get(Discount.SPECIAL)).isEqualTo(expectedSpecialDiscount);
         assertThat(discountResult.get(Discount.GIFT)).isEqualTo(expectedGiftDiscount);
     }
-    
+
     @DisplayName("할인 후 예상 결제 금액을 계산한다.")
     @ParameterizedTest
     @CsvSource({"1,211385", "3,212208", "27,214408"})
