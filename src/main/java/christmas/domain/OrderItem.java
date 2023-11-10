@@ -3,6 +3,8 @@ package christmas.domain;
 
 import static christmas.domain.utils.ErrorMessage.MIN_ORDER_ITEM_ERROR;
 
+import christmas.domain.menu.Dessert;
+import christmas.domain.menu.Main;
 import christmas.domain.menu.Menu;
 
 public class OrderItem {
@@ -27,7 +29,15 @@ public class OrderItem {
         return menu.getPrice() * number;
     }
 
-    public int accumulate(int totalOrderItems) {
+    public int accumulateNumber(int totalOrderItems) {
         return totalOrderItems + number;
+    }
+
+    public boolean isDessert() {
+        return menu instanceof Dessert;
+    }
+
+    public boolean isMain() {
+        return menu instanceof Main;
     }
 }
