@@ -1,30 +1,23 @@
 package christmas.domain;
 
-
-import christmas.domain.menu.Menu;
+import java.util.List;
 
 public class Order {
-    private static final int MIN_NUMBER = 1;
-    private final Menu menu;
-    private final int number;
+    private static final int MAX_TOTAL_ORDER_ITEMS = 20;
+    List<OrderItem> orderItems;
 
-    public Order(Menu menu, int number) {
-        validateNumber(number);
-        this.menu = menu;
-        this.number = number;
+    public Order(List<OrderItem> orderItems) {
+        validateTotalOrderNumber(orderItems);
+        this.orderItems = orderItems;
     }
 
-    private void validateNumber(int number) {
-        if (number < MIN_NUMBER) {
-            throw new IllegalArgumentException(String.format("[ERROR] 주문 가능한 최소 메뉴 개수는 %d개 입니다.", MIN_NUMBER));
+    private void validateTotalOrderNumber(List<OrderItem> orderItems) {
+        int totalOrderItems = orderItems.stream()
+                .mapToInt(OrderItem::getNumber)
+                .sum();
+        if (totalOrderItems > MAX_TOTAL_ORDER_ITEMS) {
+            throw new IllegalArgumentException(
+                    String.format("[ERROR] 주문한 메뉴당 개수의 총합은 최대 %d개까지 가능합니다.", MAX_TOTAL_ORDER_ITEMS));
         }
-    }
-
-    public long calculatePrice() {
-        return menu.getPrice() * number;
-    }
-
-    public int getNumber() {
-        return number;
     }
 }
