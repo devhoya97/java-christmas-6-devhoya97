@@ -2,8 +2,6 @@ package christmas.domain;
 
 public class PromotionResult {
 
-    private
-
     public long calculateTotalDiscount() {
         return 0;
     }
