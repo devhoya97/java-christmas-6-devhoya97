@@ -16,7 +16,7 @@ public class Order {
 
     private void validateNumber(int number) {
         if (number < MIN_NUMBER) {
-            throw new IllegalArgumentException(String.format("[ERROR] 최소 주문 개수는 %d개 입니다.", MIN_NUMBER));
+            throw new IllegalArgumentException(String.format("[ERROR] 주문 가능한 최소 메뉴 개수는 %d개 입니다.", MIN_NUMBER));
         }
     }
 

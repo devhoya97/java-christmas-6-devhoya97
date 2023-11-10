@@ -17,7 +17,7 @@ public class Orders {
                 .sum();
         if (totalOrderNumber > MAX_TOTAL_ORDERS_NUMBER) {
             throw new IllegalArgumentException(
-                    String.format("[ERROR] 주문 개수 총합은 최대 %d개 입니다.", MAX_TOTAL_ORDERS_NUMBER));
+                    String.format("[ERROR] 주문 가능한 메뉴 개수는 최대 %d개 입니다.", MAX_TOTAL_ORDERS_NUMBER));
         }
     }
 }

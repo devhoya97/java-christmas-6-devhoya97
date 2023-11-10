@@ -24,6 +24,6 @@ class OrdersTest {
         // then
         assertThatThrownBy(() -> new Orders(List.of(tapas, christmasPasta, chocoCake, zeroCoke)))
                 .isInstanceOf(IllegalArgumentException.class)
-                .hasMessageContaining(String.format("[ERROR] 주문 개수 총합은 최대 %d개 입니다.", 20));
+                .hasMessageContaining(String.format("[ERROR] 주문 가능한 메뉴 개수는 최대 %d개 입니다.", 20));
     }
 }
