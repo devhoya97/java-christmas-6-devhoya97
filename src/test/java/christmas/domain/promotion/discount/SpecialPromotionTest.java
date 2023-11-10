@@ -1,4 +1,4 @@
-package christmas.domain.promotion;
+package christmas.domain.promotion.discount;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -9,13 +9,14 @@ import christmas.domain.menu.Appetizer;
 import christmas.domain.menu.Dessert;
 import christmas.domain.menu.Drink;
 import christmas.domain.menu.Main;
+import christmas.domain.promotion.discount.SpecialPromotion;
 import java.util.List;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-class WeekendPromotionTest {
+class SpecialPromotionTest {
 
-    @DisplayName("주말 할인 적용 시 할인 금액을 계산한다.")
+    @DisplayName("특별 할인 적용 시 할인 금액을 계산한다.")
     @Test
     void calculateDiscount() {
         // given
@@ -25,10 +26,10 @@ class WeekendPromotionTest {
         OrderItem iceCream = new OrderItem(Dessert.ICE_CREAM, 1);
         OrderItem zeroCoke = new OrderItem(Drink.ZERO_COKE, 4);
         Order order = new Order(List.of(tapas, christmasPasta, chocoCake, iceCream, zeroCoke));
-        VisitDay visitDay = new VisitDay(15);
-        WeekendPromotion weekendPromotion = new WeekendPromotion(visitDay, order);
-        long expectedResult = 2023L * 2;
+        VisitDay visitDay = new VisitDay(25);
+        SpecialPromotion specialPromotion = new SpecialPromotion(visitDay, order.calculateTotalPrice());
+        long expectedResult = 1000;
         // when, then
-        assertThat(weekendPromotion.calculateDiscount()).isEqualTo(expectedResult);
+        assertThat(specialPromotion.calculateDiscount()).isEqualTo(expectedResult);
     }
 }
