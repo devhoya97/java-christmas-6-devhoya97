@@ -12,7 +12,7 @@ class OrderTest {
 
     @DisplayName("주문한 메뉴당 개수의 총합이 최대 개수를 넘을 경우 예외를 발생시킨다.")
     @Test
-    void createOrdersOverMaxNumber() {
+    void createOrderOverMaxNumber() {
         // given
         OrderItem tapas = new OrderItem(Menu.TAPAS, 5);
         OrderItem christmasPasta = new OrderItem(Menu.CHRISTMAS_PASTA, 5);
@@ -22,6 +22,18 @@ class OrderTest {
         assertThatThrownBy(() -> new Order(List.of(tapas, christmasPasta, chocoCake, zeroCoke)))
                 .isInstanceOf(IllegalArgumentException.class)
                 .hasMessageContaining("[ERROR] 주문한 메뉴당 개수의 총합은 최대 20개까지 가능합니다.");
+    }
+
+    @DisplayName("주문 메뉴에 음료밖에 없을 시 예외를 발생시킨다.")
+    @Test
+    void createOnlyDrinkOrder() {
+        // given
+        OrderItem zeroCoke = new OrderItem(Menu.ZERO_COKE, 5);
+        OrderItem redWine = new OrderItem(Menu.RED_WINE, 1);
+        // when, then
+        assertThatThrownBy(() -> new Order(List.of(zeroCoke, redWine)))
+                .isInstanceOf(IllegalArgumentException.class)
+                .hasMessageContaining("[ERROR] 음료만 주문하는 것은 불가능합니다.");
     }
 
     @DisplayName("전체 주문 금액을 계산한다.")
