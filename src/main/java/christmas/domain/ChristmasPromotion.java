@@ -6,24 +6,20 @@ public class ChristmasPromotion {
     private static final int MIN_TOTAL_PRICE = 10000;
     private static final int DEFAULT_DISCOUNT = 1000;
     private static final int INCREASING_DISCOUNT = 100;
+    private static final int NO_DISCOUNT = 0;
 
-    private final int day;
+    private final VisitDay visitDay;
     private final int totalPrice;
 
-    public ChristmasPromotion(int day, int totalPrice) {
-        this.day = day;
+    public ChristmasPromotion(VisitDay visitDay, int totalPrice) {
+        this.visitDay = visitDay;
         this.totalPrice = totalPrice;
     }
 
-    public int calculateDiscountedPrice() {
-        if (canReceive()) {
-            int totalDiscount = DEFAULT_DISCOUNT + ((day - START_DAY) * INCREASING_DISCOUNT);
-            return totalPrice - totalDiscount;
+    public int calculateDiscount() {
+        if (visitDay.isInChristmasPromotion() && totalPrice >= MIN_TOTAL_PRICE) {
+            return DEFAULT_DISCOUNT + (visitDay.getDifferenceFromMinDay() * INCREASING_DISCOUNT);
         }
-        return totalPrice;
-    }
-
-    private boolean canReceive() {
-        return (day >= START_DAY && day <= END_DAY && totalPrice >= MIN_TOTAL_PRICE);
+        return NO_DISCOUNT;
     }
 }
