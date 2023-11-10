@@ -33,4 +33,16 @@ class VisitDayTest {
         // then
         assertThat(isInChristmasPromotion).isEqualTo(expectedResult);
     }
+
+    @DisplayName("방문 날짜가 주말 할인 기간이 맞는지 알려준다.")
+    @ParameterizedTest
+    @CsvSource({"1,true", "5,false", "9,true", "10,false", "16,true"})
+    void isInWeekendPromotion(int day, boolean expectedResult) {
+        // given
+        VisitDay visitDay = new VisitDay(day);
+        // when
+        boolean isInWeekendPromotion = visitDay.isInWeekendPromotion();
+        // then
+        assertThat(isInWeekendPromotion).isEqualTo(expectedResult);
+    }
 }
