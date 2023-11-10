@@ -30,4 +30,8 @@ public class VisitDay {
         int remain = visitDay % WEEK_SIZE;
         return (remain == FRIDAY_REMAIN) || (remain == SATURDAY_REMAIN);
     }
+
+    public boolean isInWeekDayPromotion() {
+        return !isInWeekendPromotion();
+    }
 }
