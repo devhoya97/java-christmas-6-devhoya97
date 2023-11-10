@@ -29,4 +29,24 @@ public class Order {
                 .mapToLong(OrderItem::calculatePrice)
                 .sum();
     }
+
+    public int countDesserts() {
+        int count = 0;
+        for (OrderItem orderItem : orderItems) {
+            if (orderItem.isDessert()) {
+                count = orderItem.accumulateNumber(count);
+            }
+         }
+        return count;
+    }
+
+    public int countMains() {
+        int count = 0;
+        for (OrderItem orderItem : orderItems) {
+            if (orderItem.isMain()) {
+                count = orderItem.accumulateNumber(count);
+            }
+        }
+        return count;
+    }
 }
