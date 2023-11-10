@@ -69,4 +69,16 @@ class VisitDayTest {
         // then
         assertThat(isInSpecialPromotion).isEqualTo(expectedResult);
     }
+
+    @DisplayName("방문 날짜가 첫째날로부터 며칠이나 지났는지 계산한다.")
+    @ParameterizedTest
+    @CsvSource({"1,0", "2,1", "25,24"})
+    void getDifferenceFromMinDay(int day, int expectedResult) {
+        // given
+        VisitDay visitDay = new VisitDay(day);
+        // when
+        int differenceFromMinDay = visitDay.getDifferenceFromMinDay();
+        // then
+        assertThat(differenceFromMinDay).isEqualTo(expectedResult);
+    }
 }
