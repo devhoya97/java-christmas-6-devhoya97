@@ -1,12 +1,11 @@
 package christmas.domain.promotion.discount;
 
 import christmas.domain.Order;
-import christmas.domain.VisitDay;
+import christmas.domain.VisitDate;
 import christmas.domain.menu.Drink;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Map.Entry;
-import java.util.stream.Collectors;
 
 public class Discounter {
     private static final long PROMOTION_THRESHOLD = 10000;
@@ -16,12 +15,12 @@ public class Discounter {
     private static final long DISCOUNT_PER_MENU = 2023;
     private static final long NO_DISCOUNT = 0;
 
-    private final VisitDay visitDay;
+    private final VisitDate visitDate;
     private final Order order;
     private final Map<Discount, Long> result = new HashMap<>();
 
-    public Discounter(VisitDay visitDay, Order order) {
-        this.visitDay = visitDay;
+    public Discounter(VisitDate visitDate, Order order) {
+        this.visitDate = visitDate;
         this.order = order;
         calculateResult();
     }
@@ -44,7 +43,7 @@ public class Discounter {
         calculateChristmasDiscount();
         calculateSpecialDiscount();
         calculateGiftDiscount();
-        if (visitDay.isInWeekDayPromotion()) {
+        if (visitDate.isInWeekDayPromotion()) {
             calculateWeekDayDiscount();
             return;
         }
@@ -53,15 +52,15 @@ public class Discounter {
 
     private void calculateChristmasDiscount() {
         long discount = NO_DISCOUNT;
-        if (visitDay.isInChristmasPromotion() && (order.calculateTotalPrice() >= PROMOTION_THRESHOLD)) {
-            discount = DEFAULT_DISCOUNT + (visitDay.getDifferenceFromMinDay() * INCREASING_DISCOUNT);
+        if (visitDate.isInChristmasPromotion() && (order.calculateTotalPrice() >= PROMOTION_THRESHOLD)) {
+            discount = DEFAULT_DISCOUNT + (visitDate.getDifferenceFromMinDay() * INCREASING_DISCOUNT);
         }
         result.put(Discount.CHRISTMAS, discount);
     }
 
     private void calculateWeekDayDiscount() {
         long discount = NO_DISCOUNT;
-        if ((visitDay.isInWeekDayPromotion()) && (order.calculateTotalPrice() >= PROMOTION_THRESHOLD)) {
+        if ((visitDate.isInWeekDayPromotion()) && (order.calculateTotalPrice() >= PROMOTION_THRESHOLD)) {
             int dessertCount = order.countDesserts();
             discount = dessertCount * DISCOUNT_PER_MENU;
         }
@@ -70,7 +69,7 @@ public class Discounter {
 
     private void calculateWeekendDiscount() {
         long discount = NO_DISCOUNT;
-        if ((visitDay.isInWeekendPromotion()) && (order.calculateTotalPrice() >= PROMOTION_THRESHOLD)) {
+        if ((visitDate.isInWeekendPromotion()) && (order.calculateTotalPrice() >= PROMOTION_THRESHOLD)) {
             int mainCount = order.countMains();
             discount = mainCount * DISCOUNT_PER_MENU;
         }
@@ -79,7 +78,7 @@ public class Discounter {
 
     private void calculateSpecialDiscount() {
         long discount = NO_DISCOUNT;
-        if ((visitDay.isInSpecialPromotion()) && (order.calculateTotalPrice() >= PROMOTION_THRESHOLD)) {
+        if ((visitDate.isInSpecialPromotion()) && (order.calculateTotalPrice() >= PROMOTION_THRESHOLD)) {
             discount = DEFAULT_DISCOUNT;
         }
         result.put(Discount.SPECIAL, discount);

@@ -4,7 +4,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 import christmas.domain.Order;
 import christmas.domain.OrderItem;
-import christmas.domain.VisitDay;
+import christmas.domain.VisitDate;
 import christmas.domain.menu.Appetizer;
 import christmas.domain.menu.Dessert;
 import christmas.domain.menu.Drink;
@@ -30,8 +30,8 @@ class DiscounterTest {
         OrderItem iceCream = new OrderItem(Dessert.ICE_CREAM, 1);
         OrderItem zeroCoke = new OrderItem(Drink.ZERO_COKE, 4);
         Order order = new Order(List.of(tapas, christmasPasta, seafoodPasta, chocoCake, iceCream, zeroCoke));
-        VisitDay visitDay = new VisitDay(day);
-        Discounter discounter = new Discounter(visitDay, order);
+        VisitDate visitDate = new VisitDate(day);
+        Discounter discounter = new Discounter(visitDate, order);
         // when
         Map<Discount, Long> discountResult = discounter.getResult();
         // then
@@ -54,8 +54,8 @@ class DiscounterTest {
         OrderItem iceCream = new OrderItem(Dessert.ICE_CREAM, 1);
         OrderItem zeroCoke = new OrderItem(Drink.ZERO_COKE, 4);
         Order order = new Order(List.of(tapas, christmasPasta, seafoodPasta, chocoCake, iceCream, zeroCoke));
-        VisitDay visitDay = new VisitDay(day);
-        Discounter discounter = new Discounter(visitDay, order);
+        VisitDate visitDate = new VisitDate(day);
+        Discounter discounter = new Discounter(visitDate, order);
         // when, then
         assertThat(discounter.calculateTotalDiscountedPrice()).isEqualTo(expectedResult);
     }
