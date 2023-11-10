@@ -45,7 +45,7 @@ public class InputView {
         List<OrderItem> orderItems = new ArrayList<>();
         for (String splitInput : input.split(INPUT_DELIMITER)) {
             String[] menuWithNumber = splitInput.split(ORDER_ITEM_DELIMITER);
-            
+
             String menuBeforeParse = menuWithNumber[MENU_INDEX].trim();
             Menu menu = parseInputToMenu(menuBeforeParse);
 
