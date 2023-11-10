@@ -2,7 +2,7 @@ package christmas.domain;
 
 public class WeekDayPromotion {
     private static final long MIN_TOTAL_PRICE = 10000;
-    private static final long DISCOUNT_PER_DESSERT = 2023;
+    public static final long DISCOUNT_PER_DESSERT = 2023;
     private static final long NO_DISCOUNT = 0;
 
     private final VisitDay visitDay;
