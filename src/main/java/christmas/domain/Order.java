@@ -4,9 +4,11 @@ import static christmas.domain.utils.ErrorMessage.MAX_ORDER_ITEMS_ERROR;
 import static christmas.domain.utils.ErrorMessage.ONLY_DRINK_ERROR;
 
 import java.util.List;
+import java.util.StringJoiner;
 
 public class Order {
     private static final int MAX_TOTAL_ORDER_ITEMS = 20;
+    private static final String NEW_LINE = "\n";
     List<OrderItem> orderItems;
 
     public Order(List<OrderItem> orderItems) {
@@ -59,5 +61,14 @@ public class Order {
             }
         }
         return count;
+    }
+
+    @Override
+    public String toString() {
+        StringJoiner orderResult = new StringJoiner(NEW_LINE);
+        orderItems.stream()
+                .map(OrderItem::toString)
+                .forEach(orderResult::add);
+        return orderResult.toString();
     }
 }
