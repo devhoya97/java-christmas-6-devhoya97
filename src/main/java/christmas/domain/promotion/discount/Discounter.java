@@ -5,6 +5,8 @@ import christmas.domain.VisitDay;
 import christmas.domain.menu.Drink;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Map.Entry;
+import java.util.stream.Collectors;
 
 public class Discounter {
     private static final long PROMOTION_THRESHOLD = 10000;
@@ -26,6 +28,16 @@ public class Discounter {
 
     public Map<Discount, Long> getResult() {
         return result;
+    }
+
+    public long calculateTotalDiscountedPrice() {
+        // 증정 이벤트로 받은 혜택은 할인 후 예상 결제 금액에 영향을 미치지 않으므로 배제한다.
+        long totalDiscount = result.entrySet()
+                .stream()
+                .filter(entry -> entry.getKey() != Discount.GIFT)
+                .mapToLong(Entry::getValue)
+                .sum();
+        return order.calculateTotalPrice() - totalDiscount;
     }
 
     private void calculateResult() {
