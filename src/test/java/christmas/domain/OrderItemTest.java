@@ -53,4 +53,14 @@ class OrderItemTest {
         assertThat(orderItem.isMain()).isEqualTo(true);
         assertThat(otherOrderItem.isMain()).isEqualTo(false);
     }
+
+    @DisplayName("메뉴이름 개수 포멧으로 String을 반환한다.")
+    @Test
+    void returnFormattedString() {
+        // given
+        OrderItem christmasPasta = new OrderItem(Menu.CHRISTMAS_PASTA, 2);
+        String expectedResult = "크리스마스파스타 2개";
+        // when, then
+        assertThat(christmasPasta.toString()).isEqualTo(expectedResult);
+    }
 }

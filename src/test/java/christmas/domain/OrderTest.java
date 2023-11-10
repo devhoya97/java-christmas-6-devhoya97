@@ -82,13 +82,5 @@ class OrderTest {
         assertThat(order.countMains()).isEqualTo(expectedResult);
     }
 
-    @DisplayName("메뉴이름 개수 포멧으로 String을 반환한다.")
-    @Test
-    void returnFormattedString() {
-        // given
-        OrderItem christmasPasta = new OrderItem(Menu.CHRISTMAS_PASTA, 2);
-        String expectedResult = "크리스마스파스타 2개";
-        // when, then
-        assertThat(christmasPasta.toString()).isEqualTo(expectedResult);
-    }
+    @DisplayName("주문 받은 메뉴를 new line을 기준으로 구분하여 String으로 반환한다.")
 }
