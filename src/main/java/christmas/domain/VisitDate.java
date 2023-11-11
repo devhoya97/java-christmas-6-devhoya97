@@ -1,6 +1,6 @@
 package christmas.domain;
 
-import static christmas.domain.utils.ErrorMessage.DAY_OUT_OF_RANGE_ERROR;
+import static christmas.domain.utils.ErrorMessage.INVALID_DATE_ERROR;
 
 public class VisitDate {
     private static final int MIN_DAY = 1;
@@ -18,7 +18,7 @@ public class VisitDate {
 
     private void validateDecember(int visitDate) {
         if (visitDate < MIN_DAY || visitDate > MAX_DAY) {
-            throw new IllegalArgumentException(String.format(DAY_OUT_OF_RANGE_ERROR, MIN_DAY, MAX_DAY));
+            throw new IllegalArgumentException(INVALID_DATE_ERROR);
         }
     }
 

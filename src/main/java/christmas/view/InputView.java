@@ -1,7 +1,7 @@
 package christmas.view;
 
-import static christmas.domain.utils.ErrorMessage.NOT_INTEGER_INPUT_ERROR;
-import static christmas.domain.utils.ErrorMessage.NOT_PREPARED_MENU_ERROR;
+import static christmas.domain.utils.ErrorMessage.INVALID_DATE_ERROR;
+import static christmas.domain.utils.ErrorMessage.INVALID_MENU_ERROR;
 
 import camp.nextstep.edu.missionutils.Console;
 import christmas.domain.Order;
@@ -17,26 +17,39 @@ public class InputView {
     private static final int MENU_INDEX = 0;
     private static final int NUMBER_INDEX = 1;
     public static VisitDate readDate() {
+        System.out.println("12월 중 식당 예상 방문 날짜는 언제인가요? (숫자만 입력해 주세요!)");
         while(true) {
-            System.out.println("12월 중 식당 예상 방문 날짜는 언제인가요? (숫자만 입력해 주세요!)");
             String input = getTrimmedInput();
             try {
-                int date = parseInputToInteger(input);
+                int date = parseDateInputToInteger(input);
                 return new VisitDate(date);
             } catch (IllegalArgumentException illegalArgumentException) {
-                // 오류 발생시 while문을 다시 돌며 재입력받는다.
+                System.out.println(illegalArgumentException.getMessage());
             }
         }
     }
 
+    private static String getTrimmedInput() {
+        String input = Console.readLine();
+        return input.trim();
+    }
+
+    private static int parseDateInputToInteger(String input) {
+        try {
+            return Integer.parseInt(input);
+        } catch (NumberFormatException numberFormatException) {
+            throw new IllegalArgumentException(INVALID_DATE_ERROR);
+        }
+    }
+
     public static Order readOrder() {
+        System.out.println("주문하실 메뉴를 메뉴와 개수를 알려주세요. (e.g. 해산물파스타-2,레드와인-1,초코케이크-1)");
         while(true) {
-            System.out.println("주문하실 메뉴를 메뉴와 개수를 알려주세요. (e.g. 해산물파스타-2,레드와인-1,초코케이크-1)");
             String input = getTrimmedInput();
             try {
                 return parseInputToOrder(input);
             } catch (IllegalArgumentException illegalArgumentException) {
-                // 오류 발생시 while문을 다시 돌며 재입력받는다.
+                System.out.println(illegalArgumentException.getMessage());
             }
         }
     }
@@ -50,7 +63,7 @@ public class InputView {
             Menu menu = parseInputToMenu(menuBeforeParse);
 
             String numberBeforeParse = menuWithNumber[NUMBER_INDEX].trim();
-            int number = parseInputToInteger(numberBeforeParse);
+            int number = parseMenuNumberInputToInteger(numberBeforeParse);
 
             orderItems.add(new OrderItem(menu, number));
         }
@@ -63,19 +76,14 @@ public class InputView {
                 return menu;
             }
         }
-        throw new IllegalArgumentException(NOT_PREPARED_MENU_ERROR);
+        throw new IllegalArgumentException(INVALID_MENU_ERROR);
     }
 
-    private static String getTrimmedInput() {
-        String input = Console.readLine();
-        return input.trim();
-    }
-
-    private static int parseInputToInteger(String input) {
+    private static int parseMenuNumberInputToInteger(String input) {
         try {
             return Integer.parseInt(input);
         } catch (NumberFormatException numberFormatException) {
-            throw new IllegalArgumentException(NOT_INTEGER_INPUT_ERROR);
+            throw new IllegalArgumentException(INVALID_MENU_ERROR);
         }
     }
 }
