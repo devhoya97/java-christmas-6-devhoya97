@@ -17,6 +17,7 @@ public class OutputView {
     private final static String MONEY_UNIT = "원";
     private static final String NOTHING = "없음";
     private static final String NEW_LINE = "\n";
+    private final static long NO_DISCOUNT = 0L;
     public void printResult(VisitDate visitDate, Order order, Discounter discounter, Badge badge) {
         Map<Discount, Long> discountResult = discounter.getResult();
         StringJoiner result = new StringJoiner(NEW_LINE);
@@ -25,7 +26,9 @@ public class OutputView {
         result.add("\n<할인 전 총주문 금액>").add(order.calculateTotalPrice() + "원");
         addGiftMenuMessage(result, discountResult);
         addEachDiscountMessage(result, discountResult);
-//        addTotalDiscountMessage(result, discountResult);
+        addTotalDiscountMessage(result, discounter);
+        addDiscountedPriceMessage(result, discounter);
+        result.add("\n<12월 이벤트 배지>").add(badge.getName());
         System.out.println(result);
     }
 
@@ -55,15 +58,21 @@ public class OutputView {
 
     private void addTotalDiscountMessage(StringJoiner result, Discounter discounter) {
         result.add("\n<총혜택 금액>");
-//        if (discounter.) {
-//            result.add(0 + MONEY_UNIT);
-//            return;
-//        }
-//        long totalDiscount =
-//        String discountName = eachDiscount.getKey().getName();
-//        DecimalFormat thousandSeparator = new DecimalFormat(DECIMAL_FORMAT);
-//        String formattedDiscount = thousandSeparator.format(eachDiscount.getValue());
-//
-//        result.add(discountName + DISCOUNT_DELIMITER + MINUS + formattedDiscount + MONEY_UNIT);
+        long totalDiscount = discounter.calculateTotalDiscount();
+        if (totalDiscount == NO_DISCOUNT) {
+            result.add(NO_DISCOUNT + MONEY_UNIT);
+            return;
+        }
+        DecimalFormat thousandSeparator = new DecimalFormat(DECIMAL_FORMAT);
+        String formattedDiscount = thousandSeparator.format(totalDiscount);
+        result.add(MINUS + formattedDiscount + MONEY_UNIT);
+    }
+
+    private void addDiscountedPriceMessage(StringJoiner result, Discounter discounter) {
+        result.add("\n<할인 후 예상 결제 금액>");
+        long totalDiscountedPrice = discounter.calculateTotalDiscountedPrice();
+        DecimalFormat thousandSeparator = new DecimalFormat(DECIMAL_FORMAT);
+        String formattedDiscountedPrice = thousandSeparator.format(totalDiscountedPrice);
+        result.add(formattedDiscountedPrice + MONEY_UNIT);
     }
 }
