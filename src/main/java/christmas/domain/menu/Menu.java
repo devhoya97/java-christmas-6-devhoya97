@@ -1,9 +1,9 @@
 package christmas.domain.menu;
 
 public enum Menu {
-    MUSHROOM_SOUP("에피타이저","양송이수프", 6000),
-    TAPAS("에피타이저", "타파스", 5500),
-    CAESAR_SALAD("에피타이저", "시저샐러드", 8000),
+    MUSHROOM_SOUP("애피타이저","양송이수프", 6000),
+    TAPAS("애피타이저", "타파스", 5500),
+    CAESAR_SALAD("애피타이저", "시저샐러드", 8000),
     T_BONE_STEAK("메인", "티본스테이크", 55000),
     BBQ_RIBS("메인", "바비큐립", 54000),
     SEAFOOD_PASTA("메인", "해산물파스타", 35000),
