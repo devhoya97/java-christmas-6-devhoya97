@@ -36,6 +36,18 @@ class OrderTest {
                 .hasMessageContaining("[ERROR] 음료만 주문하는 것은 불가능합니다.");
     }
 
+    @DisplayName("중복된 주문 메뉴를 받은 경우 예외를 발생시킨다.")
+    @Test
+    void createOrderByDuplicatedMenu() {
+        // given
+        OrderItem caesarSalad = new OrderItem(Menu.CAESAR_SALAD, 5);
+        OrderItem otherCaesarSalad = new OrderItem(Menu.CAESAR_SALAD, 1);
+        // when, then
+        assertThatThrownBy(() -> new Order(List.of(caesarSalad, otherCaesarSalad)))
+                .isInstanceOf(IllegalArgumentException.class)
+                .hasMessageContaining("[ERROR] 유효하지 않은 주문입니다. 다시 입력해 주세요.");
+    }
+
     @DisplayName("전체 주문 금액을 계산한다.")
     @Test
     void calculateTotalPrice() {

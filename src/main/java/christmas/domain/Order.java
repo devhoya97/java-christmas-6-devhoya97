@@ -1,9 +1,12 @@
 package christmas.domain;
 
+import static christmas.domain.utils.ErrorMessage.INVALID_MENU_ERROR;
 import static christmas.domain.utils.ErrorMessage.MAX_ORDER_ITEMS_ERROR;
 import static christmas.domain.utils.ErrorMessage.ONLY_DRINK_ERROR;
 
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 import java.util.StringJoiner;
 
 public class Order {
@@ -14,6 +17,7 @@ public class Order {
     public Order(List<OrderItem> orderItems) {
         validateTotalOrderNumber(orderItems);
         validateNotOnlyDrink(orderItems);
+        validateNotDuplicatedMenu(orderItems);
         this.orderItems = orderItems;
     }
 
@@ -34,6 +38,13 @@ public class Order {
                 .count();
         if (notDrinkCount == 0) {
             throw new IllegalArgumentException(ONLY_DRINK_ERROR);
+        }
+    }
+
+    private void validateNotDuplicatedMenu(List<OrderItem> orderItems) {
+        Set<OrderItem> uniqueOrderItems = new HashSet<>(orderItems);
+        if (uniqueOrderItems.size() != orderItems.size()) {
+            throw new IllegalArgumentException(INVALID_MENU_ERROR);
         }
     }
 
