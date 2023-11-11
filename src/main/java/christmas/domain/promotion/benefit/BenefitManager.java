@@ -76,7 +76,7 @@ public class BenefitManager {
         return Collections.unmodifiableMap(benefitResult);
     }
 
-    public long calculateTotalPriceAfterDiscount() {
+    public long calculateDiscountedTotalPrice() {
         // 증정 이벤트로 받은 혜택은 할인 후 예상 결제 금액에 영향을 미치지 않으므로 배제한다.
         long totalDiscount = benefitResult.entrySet()
                 .stream()

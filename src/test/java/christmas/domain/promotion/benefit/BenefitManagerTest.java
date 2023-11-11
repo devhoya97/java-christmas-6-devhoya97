@@ -54,7 +54,7 @@ class BenefitManagerTest {
         VisitDate visitDate = new VisitDate(day);
         BenefitManager benefitManager = new BenefitManager(visitDate, order);
         // when, then
-        assertThat(benefitManager.calculateTotalPriceAfterDiscount()).isEqualTo(expectedResult);
+        assertThat(benefitManager.calculateDiscountedTotalPrice()).isEqualTo(expectedResult);
     }
 
     @DisplayName("총혜택 금액을 계산한다.")
