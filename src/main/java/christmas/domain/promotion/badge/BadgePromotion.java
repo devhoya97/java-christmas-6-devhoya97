@@ -17,6 +17,6 @@ public class BadgePromotion {
         if (totalDiscount >= Badge.STAR.getAcquisitionPrice()) {
             return Badge.STAR;
         }
-        return null;
+        return Badge.NOTING;
     }
 }
