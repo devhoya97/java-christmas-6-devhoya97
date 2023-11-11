@@ -16,7 +16,7 @@ public class InputView {
     private static final String ORDER_ITEM_DELIMITER = "-";
     private static final int MENU_INDEX = 0;
     private static final int NUMBER_INDEX = 1;
-    public VisitDate readDate() {
+    public static VisitDate readDate() {
         while(true) {
             System.out.println("12월 중 식당 예상 방문 날짜는 언제인가요? (숫자만 입력해 주세요!)");
             String input = getTrimmedInput();
@@ -29,7 +29,7 @@ public class InputView {
         }
     }
 
-    public Order readOrder() {
+    public static Order readOrder() {
         while(true) {
             System.out.println("주문하실 메뉴를 메뉴와 개수를 알려주세요. (e.g. 해산물파스타-2,레드와인-1,초코케이크-1)");
             String input = getTrimmedInput();
@@ -41,7 +41,7 @@ public class InputView {
         }
     }
 
-    private Order parseInputToOrder(String input) {
+    private static Order parseInputToOrder(String input) {
         List<OrderItem> orderItems = new ArrayList<>();
         for (String splitInput : input.split(INPUT_DELIMITER)) {
             String[] menuWithNumber = splitInput.split(ORDER_ITEM_DELIMITER);
@@ -57,7 +57,7 @@ public class InputView {
         return new Order(orderItems);
     }
 
-    private Menu parseInputToMenu(String input) {
+    private static Menu parseInputToMenu(String input) {
         for (Menu menu : Menu.values()) {
             if (input.equals(menu.getName())) {
                 return menu;
@@ -66,12 +66,12 @@ public class InputView {
         throw new IllegalArgumentException(NOT_PREPARED_MENU_ERROR);
     }
 
-    private String getTrimmedInput() {
+    private static String getTrimmedInput() {
         String input = Console.readLine();
         return input.trim();
     }
 
-    private int parseInputToInteger(String input) {
+    private static int parseInputToInteger(String input) {
         try {
             return Integer.parseInt(input);
         } catch (NumberFormatException numberFormatException) {
