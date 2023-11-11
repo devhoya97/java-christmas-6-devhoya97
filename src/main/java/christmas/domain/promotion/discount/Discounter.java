@@ -60,8 +60,7 @@ public class Discounter {
 
     private void calculateSpecialDiscount() {
         if ((visitDate.isInSpecialPromotion()) && (order.calculateTotalPrice() >= PROMOTION_THRESHOLD)) {
-            long discount = DEFAULT_DISCOUNT;
-            result.put(Discount.SPECIAL, discount);
+            result.put(Discount.SPECIAL, DEFAULT_DISCOUNT);
         }
     }
 
