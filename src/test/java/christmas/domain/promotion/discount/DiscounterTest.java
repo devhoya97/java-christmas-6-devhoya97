@@ -56,4 +56,22 @@ class DiscounterTest {
         // when, then
         assertThat(discounter.calculateTotalDiscountedPrice()).isEqualTo(expectedResult);
     }
+
+    @DisplayName("총혜택 금액을 계산한다.")
+    @ParameterizedTest
+    @CsvSource({"1,36115", "3,35292", "27,33092"})
+    void calculateTotalDiscount(int day, long expectedResult) {
+        // given
+        OrderItem tapas = new OrderItem(Menu.TAPAS, 1);
+        OrderItem christmasPasta = new OrderItem(Menu.CHRISTMAS_PASTA, 2);
+        OrderItem seafoodPasta = new OrderItem(Menu.SEAFOOD_PASTA, 3);
+        OrderItem chocoCake = new OrderItem(Menu.CHOCO_CAKE, 3);
+        OrderItem iceCream = new OrderItem(Menu.ICE_CREAM, 1);
+        OrderItem zeroCoke = new OrderItem(Menu.ZERO_COKE, 4);
+        Order order = new Order(List.of(tapas, christmasPasta, seafoodPasta, chocoCake, iceCream, zeroCoke));
+        VisitDate visitDate = new VisitDate(day);
+        Discounter discounter = new Discounter(visitDate, order);
+        // when, then
+        assertThat(discounter.calculateTotalDiscount()).isEqualTo(expectedResult);
+    }
 }
