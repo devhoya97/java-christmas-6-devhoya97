@@ -16,6 +16,7 @@ public class InputView {
     private static final String ORDER_ITEM_DELIMITER = "-";
     private static final int MENU_INDEX = 0;
     private static final int NUMBER_INDEX = 1;
+    private static final int MENU_WITH_NUMBER_ARRAY_SIZE = 2;
     public static VisitDate readDate() {
         System.out.println("12월 중 식당 예상 방문 날짜는 언제인가요? (숫자만 입력해 주세요!)");
         while(true) {
@@ -57,17 +58,24 @@ public class InputView {
     private static Order parseInputToOrder(String input) {
         List<OrderItem> orderItems = new ArrayList<>();
         for (String splitInput : input.split(INPUT_DELIMITER)) {
-            String[] menuWithNumber = splitInput.split(ORDER_ITEM_DELIMITER);
-
-            String menuBeforeParse = menuWithNumber[MENU_INDEX].trim();
-            Menu menu = parseInputToMenu(menuBeforeParse);
-
-            String numberBeforeParse = menuWithNumber[NUMBER_INDEX].trim();
-            int number = parseMenuNumberInputToInteger(numberBeforeParse);
-
-            orderItems.add(new OrderItem(menu, number));
+            orderItems.add(parseSplitInputToOrderItem(splitInput));
         }
         return new Order(orderItems);
+    }
+
+    private static OrderItem parseSplitInputToOrderItem(String splitInput) {
+        String[] menuWithNumber = splitInput.split(ORDER_ITEM_DELIMITER);
+        if (menuWithNumber.length != MENU_WITH_NUMBER_ARRAY_SIZE) {
+            throw new IllegalArgumentException(INVALID_MENU_ERROR);
+        }
+
+        String menuBeforeParse = menuWithNumber[MENU_INDEX].trim();
+        Menu menu = parseInputToMenu(menuBeforeParse);
+
+        String numberBeforeParse = menuWithNumber[NUMBER_INDEX].trim();
+        int number = parseMenuNumberInputToInteger(numberBeforeParse);
+
+        return new OrderItem(menu, number);
     }
 
     private static Menu parseInputToMenu(String input) {
