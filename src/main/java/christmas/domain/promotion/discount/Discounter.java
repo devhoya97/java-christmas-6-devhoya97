@@ -83,4 +83,11 @@ public class Discounter {
                 .sum();
         return order.calculateTotalPrice() - totalDiscount;
     }
+
+    public long calculateTotalDiscount() {
+        return result.values()
+                .stream()
+                .mapToLong(discountPrice -> discountPrice)
+                .sum();
+    }
 }
