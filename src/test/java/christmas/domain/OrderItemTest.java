@@ -17,7 +17,7 @@ class OrderItemTest {
     void createOrderByLessThanOne(int number) {
         assertThatThrownBy(() -> new OrderItem(Menu.BBQ_RIBS, number))
                 .isInstanceOf(IllegalArgumentException.class)
-                .hasMessageContaining("[ERROR] 선택한 메뉴의 개수가 1개보다 작습니다.");
+                .hasMessageContaining("[ERROR] 유효하지 않은 주문입니다. 다시 입력해 주세요.");
     }
 
     @DisplayName("주문 받은 메뉴와 개수를 고려하여 주문의 가격을 계산한다.")
