@@ -1,7 +1,22 @@
 package christmas;
 
+import christmas.domain.Order;
+import christmas.domain.VisitDate;
+import christmas.domain.promotion.badge.Badge;
+import christmas.domain.promotion.badge.BadgePromotion;
+import christmas.domain.promotion.discount.Discounter;
+import christmas.view.InputView;
+import christmas.view.OutputView;
+
 public class Application {
     public static void main(String[] args) {
-        // TODO: 프로그램 구현
+        VisitDate visitDate = InputView.readDate();
+        Order order = InputView.readOrder();
+
+        Discounter discounter = new Discounter(visitDate, order);
+        BadgePromotion badgePromotion = new BadgePromotion(discounter.calculateTotalDiscount());
+        Badge badge = badgePromotion.getBadge();
+
+        OutputView.printResult(visitDate, order, discounter, badge);
     }
 }
