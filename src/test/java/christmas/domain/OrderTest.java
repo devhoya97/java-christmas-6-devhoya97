@@ -21,7 +21,7 @@ class OrderTest {
         // when, then
         assertThatThrownBy(() -> new Order(List.of(tapas, christmasPasta, chocoCake, zeroCoke)))
                 .isInstanceOf(IllegalArgumentException.class)
-                .hasMessageContaining("[ERROR] 주문한 메뉴당 개수의 총합은 최대 20개까지 가능합니다.");
+                .hasMessageContaining("[ERROR] 유효하지 않은 주문입니다. 다시 입력해 주세요.");
     }
 
     @DisplayName("주문 메뉴에 음료밖에 없을 시 예외를 발생시킨다.")
@@ -33,7 +33,7 @@ class OrderTest {
         // when, then
         assertThatThrownBy(() -> new Order(List.of(zeroCoke, redWine)))
                 .isInstanceOf(IllegalArgumentException.class)
-                .hasMessageContaining("[ERROR] 음료만 주문하는 것은 불가능합니다.");
+                .hasMessageContaining("[ERROR] 유효하지 않은 주문입니다. 다시 입력해 주세요.");
     }
 
     @DisplayName("중복된 주문 메뉴를 받은 경우 예외를 발생시킨다.")

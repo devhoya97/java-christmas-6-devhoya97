@@ -1,8 +1,6 @@
 package christmas.domain;
 
 import static christmas.domain.utils.ErrorMessage.INVALID_MENU_ERROR;
-import static christmas.domain.utils.ErrorMessage.MAX_TOTAL_COUNT_ERROR;
-import static christmas.domain.utils.ErrorMessage.ONLY_DRINK_ERROR;
 
 import java.util.HashSet;
 import java.util.List;
@@ -27,7 +25,7 @@ public class Order {
             totalCount = orderItem.accumulateCount(totalCount);
         }
         if (totalCount > MAX_TOTAL_COUNT) {
-            throw new IllegalArgumentException(String.format(MAX_TOTAL_COUNT_ERROR, MAX_TOTAL_COUNT));
+            throw new IllegalArgumentException(INVALID_MENU_ERROR);
         }
     }
 
@@ -36,7 +34,7 @@ public class Order {
                 .filter(OrderItem::isNotDrink)
                 .count();
         if (notDrinkCount == 0) {
-            throw new IllegalArgumentException(ONLY_DRINK_ERROR);
+            throw new IllegalArgumentException(INVALID_MENU_ERROR);
         }
     }
 
