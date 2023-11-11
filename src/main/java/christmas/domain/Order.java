@@ -1,7 +1,7 @@
 package christmas.domain;
 
 import static christmas.domain.utils.ErrorMessage.INVALID_MENU_ERROR;
-import static christmas.domain.utils.ErrorMessage.MAX_ORDER_ITEMS_ERROR;
+import static christmas.domain.utils.ErrorMessage.MAX_TOTAL_COUNT_ERROR;
 import static christmas.domain.utils.ErrorMessage.ONLY_DRINK_ERROR;
 
 import java.util.HashSet;
@@ -10,25 +10,24 @@ import java.util.Set;
 import java.util.StringJoiner;
 
 public class Order {
-    private static final int MAX_TOTAL_ORDER_ITEMS = 20;
+    private static final int MAX_TOTAL_COUNT = 20;
     private static final String NEW_LINE = "\n";
     List<OrderItem> orderItems;
 
     public Order(List<OrderItem> orderItems) {
-        validateTotalOrderNumber(orderItems);
+        validateTotalCount(orderItems);
         validateNotOnlyDrink(orderItems);
         validateNotDuplicatedMenu(orderItems);
         this.orderItems = orderItems;
     }
 
-    private void validateTotalOrderNumber(List<OrderItem> orderItems) {
-        int totalOrderItems = 0;
+    private void validateTotalCount(List<OrderItem> orderItems) {
+        int totalCount = 0;
         for (OrderItem orderItem : orderItems) {
-            totalOrderItems = orderItem.accumulateNumber(totalOrderItems);
+            totalCount = orderItem.accumulateCount(totalCount);
         }
-        if (totalOrderItems > MAX_TOTAL_ORDER_ITEMS) {
-            throw new IllegalArgumentException(
-                    String.format(MAX_ORDER_ITEMS_ERROR, MAX_TOTAL_ORDER_ITEMS));
+        if (totalCount > MAX_TOTAL_COUNT) {
+            throw new IllegalArgumentException(String.format(MAX_TOTAL_COUNT_ERROR, MAX_TOTAL_COUNT));
         }
     }
 
@@ -55,23 +54,23 @@ public class Order {
     }
 
     public int countDesserts() {
-        int count = 0;
+        int dessertCount = 0;
         for (OrderItem orderItem : orderItems) {
             if (orderItem.isDessert()) {
-                count = orderItem.accumulateNumber(count);
+                dessertCount = orderItem.accumulateCount(dessertCount);
             }
          }
-        return count;
+        return dessertCount;
     }
 
     public int countMains() {
-        int count = 0;
+        int mainCount = 0;
         for (OrderItem orderItem : orderItems) {
             if (orderItem.isMain()) {
-                count = orderItem.accumulateNumber(count);
+                mainCount = orderItem.accumulateCount(mainCount);
             }
         }
-        return count;
+        return mainCount;
     }
 
     @Override

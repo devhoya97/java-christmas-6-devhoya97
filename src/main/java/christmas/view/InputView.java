@@ -14,9 +14,9 @@ import java.util.List;
 public class InputView {
     private static final String INPUT_DELIMITER = ",";
     private static final String ORDER_ITEM_DELIMITER = "-";
-    private static final int MENU_INDEX = 0;
-    private static final int NUMBER_INDEX = 1;
-    private static final int MENU_WITH_NUMBER_ARRAY_SIZE = 2;
+    private static final int MENU_NAME_INDEX = 0;
+    private static final int COUNT_INDEX = 1;
+    private static final int MENU_NAME_AND_COUNT_ARRAY_SIZE = 2;
     public static VisitDate readDate() {
         System.out.println("12월 중 식당 예상 방문 날짜는 언제인가요? (숫자만 입력해 주세요!)");
         while(true) {
@@ -57,39 +57,39 @@ public class InputView {
 
     private static Order parseInputToOrder(String input) {
         List<OrderItem> orderItems = new ArrayList<>();
-        for (String splitInput : input.split(INPUT_DELIMITER)) {
-            orderItems.add(parseSplitInputToOrderItem(splitInput));
+        for (String menuNameWithCount : input.split(INPUT_DELIMITER)) {
+            orderItems.add(parseMenuNameWithCountToOrderItem(menuNameWithCount));
         }
         return new Order(orderItems);
     }
 
-    private static OrderItem parseSplitInputToOrderItem(String splitInput) {
-        String[] menuWithNumber = splitInput.split(ORDER_ITEM_DELIMITER);
-        if (menuWithNumber.length != MENU_WITH_NUMBER_ARRAY_SIZE) {
+    private static OrderItem parseMenuNameWithCountToOrderItem(String menuNameWithCount) {
+        String[] menuNameAndCount = menuNameWithCount.split(ORDER_ITEM_DELIMITER);
+        if (menuNameAndCount.length != MENU_NAME_AND_COUNT_ARRAY_SIZE) {
             throw new IllegalArgumentException(INVALID_MENU_ERROR);
         }
 
-        String menuBeforeParse = menuWithNumber[MENU_INDEX].trim();
-        Menu menu = parseInputToMenu(menuBeforeParse);
+        String menuName = menuNameAndCount[MENU_NAME_INDEX].trim();
+        Menu menu = parseMenuNameToMenu(menuName);
 
-        String numberBeforeParse = menuWithNumber[NUMBER_INDEX].trim();
-        int number = parseMenuNumberInputToInteger(numberBeforeParse);
+        String countBeforeParse = menuNameAndCount[COUNT_INDEX].trim();
+        int count = parseCountStringToInteger(countBeforeParse);
 
-        return new OrderItem(menu, number);
+        return new OrderItem(menu, count);
     }
 
-    private static Menu parseInputToMenu(String input) {
+    private static Menu parseMenuNameToMenu(String menuName) {
         for (Menu menu : Menu.values()) {
-            if (input.equals(menu.getName())) {
+            if (menuName.equals(menu.getName())) {
                 return menu;
             }
         }
         throw new IllegalArgumentException(INVALID_MENU_ERROR);
     }
 
-    private static int parseMenuNumberInputToInteger(String input) {
+    private static int parseCountStringToInteger(String countBeforeParse) {
         try {
-            return Integer.parseInt(input);
+            return Integer.parseInt(countBeforeParse);
         } catch (NumberFormatException numberFormatException) {
             throw new IllegalArgumentException(INVALID_MENU_ERROR);
         }

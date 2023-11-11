@@ -10,29 +10,29 @@ public class OrderItem {
     private static final String MAIN = "메인";
     private static final String DESSERT = "디저트";
     private static final String DRINK = "음료";
-    private static final int MIN_ORDER_ITEM_NUMBER = 1;
+    private static final int MIN_COUNT = 1;
 
     private final Menu menu;
-    private final int number;
+    private final int count;
 
-    public OrderItem(Menu menu, int number) {
-        validateNumber(number);
+    public OrderItem(Menu menu, int count) {
+        validateCount(count);
         this.menu = menu;
-        this.number = number;
+        this.count = count;
     }
 
-    private void validateNumber(int number) {
-        if (number < MIN_ORDER_ITEM_NUMBER) {
+    private void validateCount(int count) {
+        if (count < MIN_COUNT) {
             throw new IllegalArgumentException(String.format(INVALID_MENU_ERROR));
         }
     }
 
     public long calculatePrice() {
-        return menu.getPrice() * number;
+        return menu.getPrice() * count;
     }
 
-    public int accumulateNumber(int totalOrderItems) {
-        return totalOrderItems + number;
+    public int accumulateCount(int countBeforeAccumulation) {
+        return countBeforeAccumulation + count;
     }
 
     public boolean isMain() {
@@ -67,6 +67,6 @@ public class OrderItem {
 
     @Override
     public String toString() {
-        return menu.getName() + " " + number + "개";
+        return menu.getName() + " " + count + "개";
     }
 }
