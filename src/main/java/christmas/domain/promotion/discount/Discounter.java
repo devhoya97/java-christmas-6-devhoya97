@@ -13,7 +13,7 @@ public class Discounter {
     private static final long DEFAULT_DISCOUNT = 1000;
     private static final long INCREASING_DISCOUNT = 100;
     private static final long DISCOUNT_PER_MENU = 2023;
-    private static final long NO_DISCOUNT = 0;
+    private static final long NO_COUNT = 0;
 
     private final VisitDate visitDate;
     private final Order order;
@@ -41,16 +41,18 @@ public class Discounter {
     }
 
     private void calculateWeekDayDiscount() {
-        if ((visitDate.isInWeekDayPromotion()) && (order.calculateTotalPrice() >= PROMOTION_THRESHOLD)) {
-            int dessertCount = order.countDesserts();
+        int dessertCount = order.countDesserts();
+        if ((visitDate.isInWeekDayPromotion()) && (order.calculateTotalPrice() >= PROMOTION_THRESHOLD)
+                && (dessertCount != NO_COUNT)) {
             long discount = dessertCount * DISCOUNT_PER_MENU;
             result.put(Discount.WEEK_DAY, discount);
         }
     }
 
     private void calculateWeekendDiscount() {
-        if ((visitDate.isInWeekendPromotion()) && (order.calculateTotalPrice() >= PROMOTION_THRESHOLD)) {
-            int mainCount = order.countMains();
+        int mainCount = order.countMains();
+        if ((visitDate.isInWeekendPromotion()) && (order.calculateTotalPrice() >= PROMOTION_THRESHOLD)
+                && mainCount != NO_COUNT) {
             long discount = mainCount * DISCOUNT_PER_MENU;
             result.put(Discount.WEEKEND, discount);
         }
