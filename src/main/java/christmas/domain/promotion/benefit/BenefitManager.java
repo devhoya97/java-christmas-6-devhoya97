@@ -3,6 +3,7 @@ package christmas.domain.promotion.benefit;
 import christmas.domain.Order;
 import christmas.domain.VisitDate;
 import christmas.domain.menu.Menu;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Map.Entry;
@@ -72,7 +73,7 @@ public class BenefitManager {
     }
 
     public Map<Benefit, Long> getBenefitResult() {
-        return benefitResult;
+        return Collections.unmodifiableMap(benefitResult);
     }
 
     public long calculateTotalPriceAfterDiscount() {
