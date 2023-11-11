@@ -25,6 +25,51 @@ public class Discounter {
         calculateResult();
     }
 
+    private void calculateResult() {
+        calculateChristmasDiscount();
+        calculateSpecialDiscount();
+        calculateGiftDiscount();
+        calculateWeekDayDiscount();
+        calculateWeekendDiscount();
+    }
+
+    private void calculateChristmasDiscount() {
+        if (visitDate.isInChristmasPromotion() && (order.calculateTotalPrice() >= PROMOTION_THRESHOLD)) {
+            long discount = DEFAULT_DISCOUNT + (visitDate.getDifferenceFromMinDay() * INCREASING_DISCOUNT);
+            result.put(Discount.CHRISTMAS, discount);
+        }
+    }
+
+    private void calculateWeekDayDiscount() {
+        if ((visitDate.isInWeekDayPromotion()) && (order.calculateTotalPrice() >= PROMOTION_THRESHOLD)) {
+            int dessertCount = order.countDesserts();
+            long discount = dessertCount * DISCOUNT_PER_MENU;
+            result.put(Discount.WEEK_DAY, discount);
+        }
+    }
+
+    private void calculateWeekendDiscount() {
+        if ((visitDate.isInWeekendPromotion()) && (order.calculateTotalPrice() >= PROMOTION_THRESHOLD)) {
+            int mainCount = order.countMains();
+            long discount = mainCount * DISCOUNT_PER_MENU;
+            result.put(Discount.WEEKEND, discount);
+        }
+    }
+
+    private void calculateSpecialDiscount() {
+        if ((visitDate.isInSpecialPromotion()) && (order.calculateTotalPrice() >= PROMOTION_THRESHOLD)) {
+            long discount = DEFAULT_DISCOUNT;
+            result.put(Discount.SPECIAL, discount);
+        }
+    }
+
+    private void calculateGiftDiscount() {
+        if (order.calculateTotalPrice() >= GIFT_THRESHOLD) {
+            long discount = Menu.CHAMPAGNE.getPrice();
+            result.put(Discount.GIFT, discount);
+        }
+    }
+
     public Map<Discount, Long> getResult() {
         return result;
     }
@@ -37,58 +82,5 @@ public class Discounter {
                 .mapToLong(Entry::getValue)
                 .sum();
         return order.calculateTotalPrice() - totalDiscount;
-    }
-
-    private void calculateResult() {
-        calculateChristmasDiscount();
-        calculateSpecialDiscount();
-        calculateGiftDiscount();
-        if (visitDate.isInWeekDayPromotion()) {
-            calculateWeekDayDiscount();
-            return;
-        }
-        calculateWeekendDiscount();
-    }
-
-    private void calculateChristmasDiscount() {
-        long discount = NO_DISCOUNT;
-        if (visitDate.isInChristmasPromotion() && (order.calculateTotalPrice() >= PROMOTION_THRESHOLD)) {
-            discount = DEFAULT_DISCOUNT + (visitDate.getDifferenceFromMinDay() * INCREASING_DISCOUNT);
-        }
-        result.put(Discount.CHRISTMAS, discount);
-    }
-
-    private void calculateWeekDayDiscount() {
-        long discount = NO_DISCOUNT;
-        if ((visitDate.isInWeekDayPromotion()) && (order.calculateTotalPrice() >= PROMOTION_THRESHOLD)) {
-            int dessertCount = order.countDesserts();
-            discount = dessertCount * DISCOUNT_PER_MENU;
-        }
-        result.put(Discount.WEEK_DAY, discount);
-    }
-
-    private void calculateWeekendDiscount() {
-        long discount = NO_DISCOUNT;
-        if ((visitDate.isInWeekendPromotion()) && (order.calculateTotalPrice() >= PROMOTION_THRESHOLD)) {
-            int mainCount = order.countMains();
-            discount = mainCount * DISCOUNT_PER_MENU;
-        }
-        result.put(Discount.WEEKEND, discount);
-    }
-
-    private void calculateSpecialDiscount() {
-        long discount = NO_DISCOUNT;
-        if ((visitDate.isInSpecialPromotion()) && (order.calculateTotalPrice() >= PROMOTION_THRESHOLD)) {
-            discount = DEFAULT_DISCOUNT;
-        }
-        result.put(Discount.SPECIAL, discount);
-    }
-
-    private void calculateGiftDiscount() {
-        long discount = NO_DISCOUNT;
-        if (order.calculateTotalPrice() >= GIFT_THRESHOLD) {
-            discount = Menu.CHAMPAGNE.getPrice();
-        }
-        result.put(Discount.GIFT, discount);
     }
 }

@@ -32,11 +32,11 @@ class DiscounterTest {
         // when
         Map<Discount, Long> discountResult = discounter.getResult();
         // then
-        assertThat(discountResult.get(Discount.CHRISTMAS)).isEqualTo(expectedChristmasDiscount);
+        assertThat(discountResult.getOrDefault(Discount.CHRISTMAS, 0L)).isEqualTo(expectedChristmasDiscount);
         assertThat(discountResult.getOrDefault(Discount.WEEK_DAY, 0L)).isEqualTo(expectedWeekDayDiscount);
         assertThat(discountResult.getOrDefault(Discount.WEEKEND, 0L)).isEqualTo(expectedWeekendDiscount);
-        assertThat(discountResult.get(Discount.SPECIAL)).isEqualTo(expectedSpecialDiscount);
-        assertThat(discountResult.get(Discount.GIFT)).isEqualTo(expectedGiftDiscount);
+        assertThat(discountResult.getOrDefault(Discount.SPECIAL, 0L)).isEqualTo(expectedSpecialDiscount);
+        assertThat(discountResult.getOrDefault(Discount.GIFT, 0L)).isEqualTo(expectedGiftDiscount);
     }
 
     @DisplayName("할인 후 예상 결제 금액을 계산한다.")
