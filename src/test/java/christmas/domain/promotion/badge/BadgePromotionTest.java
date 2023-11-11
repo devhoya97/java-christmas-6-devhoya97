@@ -10,7 +10,7 @@ class BadgePromotionTest {
 
     @DisplayName("혜택 금액에 따라 배지를 부여한다.")
     @ParameterizedTest
-    @CsvSource({"5000,별", "10000,트리", "20000,산타"})
+    @CsvSource({"3000,없음", "5000,별", "10000,트리", "20000,산타"})
     void getBadge(int totalDiscount, String expectedResult) {
         // given
         BadgePromotion badgePromotion = new BadgePromotion(totalDiscount);
