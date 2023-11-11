@@ -12,7 +12,7 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 
-class DiscounterTest {
+class BenefitManagerTest {
 
     @DisplayName("모든 할인 혜택을 적용한 결과를 반환한다.")
     @ParameterizedTest
@@ -28,15 +28,15 @@ class DiscounterTest {
         OrderItem zeroCoke = new OrderItem(Menu.ZERO_COKE, 4);
         Order order = new Order(List.of(tapas, christmasPasta, seafoodPasta, chocoCake, iceCream, zeroCoke));
         VisitDate visitDate = new VisitDate(day);
-        Discounter discounter = new Discounter(visitDate, order);
+        BenefitManager benefitManager = new BenefitManager(visitDate, order);
         // when
-        Map<Discount, Long> discountResult = discounter.getResult();
+        Map<Benefit, Long> discountResult = benefitManager.getBenefitResult();
         // then
-        assertThat(discountResult.getOrDefault(Discount.CHRISTMAS, 0L)).isEqualTo(expectedChristmasDiscount);
-        assertThat(discountResult.getOrDefault(Discount.WEEK_DAY, 0L)).isEqualTo(expectedWeekDayDiscount);
-        assertThat(discountResult.getOrDefault(Discount.WEEKEND, 0L)).isEqualTo(expectedWeekendDiscount);
-        assertThat(discountResult.getOrDefault(Discount.SPECIAL, 0L)).isEqualTo(expectedSpecialDiscount);
-        assertThat(discountResult.getOrDefault(Discount.GIFT, 0L)).isEqualTo(expectedGiftDiscount);
+        assertThat(discountResult.getOrDefault(Benefit.CHRISTMAS, 0L)).isEqualTo(expectedChristmasDiscount);
+        assertThat(discountResult.getOrDefault(Benefit.WEEK_DAY, 0L)).isEqualTo(expectedWeekDayDiscount);
+        assertThat(discountResult.getOrDefault(Benefit.WEEKEND, 0L)).isEqualTo(expectedWeekendDiscount);
+        assertThat(discountResult.getOrDefault(Benefit.SPECIAL, 0L)).isEqualTo(expectedSpecialDiscount);
+        assertThat(discountResult.getOrDefault(Benefit.GIFT, 0L)).isEqualTo(expectedGiftDiscount);
     }
 
     @DisplayName("할인 후 예상 결제 금액을 계산한다.")
@@ -52,9 +52,9 @@ class DiscounterTest {
         OrderItem zeroCoke = new OrderItem(Menu.ZERO_COKE, 4);
         Order order = new Order(List.of(tapas, christmasPasta, seafoodPasta, chocoCake, iceCream, zeroCoke));
         VisitDate visitDate = new VisitDate(day);
-        Discounter discounter = new Discounter(visitDate, order);
+        BenefitManager benefitManager = new BenefitManager(visitDate, order);
         // when, then
-        assertThat(discounter.calculateTotalDiscountedPrice()).isEqualTo(expectedResult);
+        assertThat(benefitManager.calculateTotalPriceAfterDiscount()).isEqualTo(expectedResult);
     }
 
     @DisplayName("총혜택 금액을 계산한다.")
@@ -70,8 +70,8 @@ class DiscounterTest {
         OrderItem zeroCoke = new OrderItem(Menu.ZERO_COKE, 4);
         Order order = new Order(List.of(tapas, christmasPasta, seafoodPasta, chocoCake, iceCream, zeroCoke));
         VisitDate visitDate = new VisitDate(day);
-        Discounter discounter = new Discounter(visitDate, order);
+        BenefitManager benefitManager = new BenefitManager(visitDate, order);
         // when, then
-        assertThat(discounter.calculateTotalDiscount()).isEqualTo(expectedResult);
+        assertThat(benefitManager.calculateTotalBenefit()).isEqualTo(expectedResult);
     }
 }

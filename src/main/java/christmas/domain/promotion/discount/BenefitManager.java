@@ -7,7 +7,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Map.Entry;
 
-public class Discounter {
+public class BenefitManager {
     private static final long PROMOTION_THRESHOLD = 10000;
     private static final long GIFT_THRESHOLD = 120000;
     private static final long DEFAULT_DISCOUNT = 1000;
@@ -17,26 +17,26 @@ public class Discounter {
 
     private final VisitDate visitDate;
     private final Order order;
-    private final Map<Discount, Long> result = new HashMap<>();
+    private final Map<Benefit, Long> benefitResult = new HashMap<>();
 
-    public Discounter(VisitDate visitDate, Order order) {
+    public BenefitManager(VisitDate visitDate, Order order) {
         this.visitDate = visitDate;
         this.order = order;
-        calculateResult();
+        calculateBenefitResult();
     }
 
-    private void calculateResult() {
+    private void calculateBenefitResult() {
         calculateChristmasDiscount();
-        calculateSpecialDiscount();
-        calculateGiftDiscount();
         calculateWeekDayDiscount();
         calculateWeekendDiscount();
+        calculateSpecialDiscount();
+        calculateGiftBenefit();
     }
 
     private void calculateChristmasDiscount() {
         if (visitDate.isInChristmasPromotion() && (order.calculateTotalPrice() >= PROMOTION_THRESHOLD)) {
             long discount = DEFAULT_DISCOUNT + (visitDate.getDifferenceFromMinDay() * INCREASING_DISCOUNT);
-            result.put(Discount.CHRISTMAS, discount);
+            benefitResult.put(Benefit.CHRISTMAS, discount);
         }
     }
 
@@ -45,7 +45,7 @@ public class Discounter {
         if ((visitDate.isInWeekDayPromotion()) && (order.calculateTotalPrice() >= PROMOTION_THRESHOLD)
                 && (dessertCount != NO_COUNT)) {
             long discount = dessertCount * DISCOUNT_PER_MENU;
-            result.put(Discount.WEEK_DAY, discount);
+            benefitResult.put(Benefit.WEEK_DAY, discount);
         }
     }
 
@@ -54,41 +54,41 @@ public class Discounter {
         if ((visitDate.isInWeekendPromotion()) && (order.calculateTotalPrice() >= PROMOTION_THRESHOLD)
                 && mainCount != NO_COUNT) {
             long discount = mainCount * DISCOUNT_PER_MENU;
-            result.put(Discount.WEEKEND, discount);
+            benefitResult.put(Benefit.WEEKEND, discount);
         }
     }
 
     private void calculateSpecialDiscount() {
         if ((visitDate.isInSpecialPromotion()) && (order.calculateTotalPrice() >= PROMOTION_THRESHOLD)) {
-            result.put(Discount.SPECIAL, DEFAULT_DISCOUNT);
+            benefitResult.put(Benefit.SPECIAL, DEFAULT_DISCOUNT);
         }
     }
 
-    private void calculateGiftDiscount() {
+    private void calculateGiftBenefit() {
         if (order.calculateTotalPrice() >= GIFT_THRESHOLD) {
-            long discount = Menu.CHAMPAGNE.getPrice();
-            result.put(Discount.GIFT, discount);
+            long benefit = Menu.CHAMPAGNE.getPrice();
+            benefitResult.put(Benefit.GIFT, benefit);
         }
     }
 
-    public Map<Discount, Long> getResult() {
-        return result;
+    public Map<Benefit, Long> getBenefitResult() {
+        return benefitResult;
     }
 
-    public long calculateTotalDiscountedPrice() {
+    public long calculateTotalPriceAfterDiscount() {
         // 증정 이벤트로 받은 혜택은 할인 후 예상 결제 금액에 영향을 미치지 않으므로 배제한다.
-        long totalDiscount = result.entrySet()
+        long totalDiscount = benefitResult.entrySet()
                 .stream()
-                .filter(entry -> entry.getKey() != Discount.GIFT)
+                .filter(entry -> entry.getKey() != Benefit.GIFT)
                 .mapToLong(Entry::getValue)
                 .sum();
         return order.calculateTotalPrice() - totalDiscount;
     }
 
-    public long calculateTotalDiscount() {
-        return result.values()
+    public long calculateTotalBenefit() {
+        return benefitResult.values()
                 .stream()
-                .mapToLong(discountPrice -> discountPrice)
+                .mapToLong(benefitPrice -> benefitPrice)
                 .sum();
     }
 }

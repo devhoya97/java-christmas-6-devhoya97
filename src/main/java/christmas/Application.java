@@ -4,7 +4,7 @@ import christmas.domain.Order;
 import christmas.domain.VisitDate;
 import christmas.domain.promotion.badge.Badge;
 import christmas.domain.promotion.badge.BadgePromotion;
-import christmas.domain.promotion.discount.Discounter;
+import christmas.domain.promotion.discount.BenefitManager;
 import christmas.view.InputView;
 import christmas.view.OutputView;
 
@@ -13,10 +13,10 @@ public class Application {
         VisitDate visitDate = InputView.readDate();
         Order order = InputView.readOrder();
 
-        Discounter discounter = new Discounter(visitDate, order);
-        BadgePromotion badgePromotion = new BadgePromotion(discounter.calculateTotalDiscount());
+        BenefitManager benefitManager = new BenefitManager(visitDate, order);
+        BadgePromotion badgePromotion = new BadgePromotion(benefitManager.calculateTotalBenefit());
         Badge badge = badgePromotion.getBadge();
 
-        OutputView.printResult(visitDate, order, discounter, badge);
+        OutputView.printResult(visitDate, order, benefitManager, badge);
     }
 }

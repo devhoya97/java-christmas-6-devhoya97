@@ -7,18 +7,18 @@ public enum Badge {
     SANTA("산타", 20000);
 
     private final String name;
-    private final long acquisitionPrice;
+    private final long acquisitionBenefit;
 
-    Badge(String name, long acquisitionPrice) {
+    Badge(String name, long acquisitionBenefit) {
         this.name = name;
-        this.acquisitionPrice = acquisitionPrice;
+        this.acquisitionBenefit = acquisitionBenefit;
     }
 
     public String getName() {
         return name;
     }
 
-    public long getAcquisitionPrice() {
-        return acquisitionPrice;
+    public long getAcquisitionBenefit() {
+        return acquisitionBenefit;
     }
 }

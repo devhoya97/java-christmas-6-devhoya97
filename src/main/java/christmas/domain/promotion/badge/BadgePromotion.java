@@ -1,20 +1,20 @@
 package christmas.domain.promotion.badge;
 
 public class BadgePromotion {
-    private final long totalDiscount;
+    private final long totalBenefit;
 
-    public BadgePromotion(long totalDiscount) {
-        this.totalDiscount = totalDiscount;
+    public BadgePromotion(long totalBenefit) {
+        this.totalBenefit = totalBenefit;
     }
 
     public Badge getBadge() {
-        if (totalDiscount >= Badge.SANTA.getAcquisitionPrice()) {
+        if (totalBenefit >= Badge.SANTA.getAcquisitionBenefit()) {
             return Badge.SANTA;
         }
-        if (totalDiscount >= Badge.TREE.getAcquisitionPrice()) {
+        if (totalBenefit >= Badge.TREE.getAcquisitionBenefit()) {
             return Badge.TREE;
         }
-        if (totalDiscount >= Badge.STAR.getAcquisitionPrice()) {
+        if (totalBenefit >= Badge.STAR.getAcquisitionBenefit()) {
             return Badge.STAR;
         }
         return Badge.NOTING;
