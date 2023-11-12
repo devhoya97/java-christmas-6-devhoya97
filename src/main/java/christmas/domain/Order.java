@@ -2,6 +2,7 @@ package christmas.domain;
 
 import static christmas.domain.utils.ErrorMessage.INVALID_MENU_ERROR;
 
+import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -69,6 +70,10 @@ public class Order {
             }
         }
         return mainCount;
+    }
+
+    public List<OrderItem> getOrderItems() {
+        return Collections.unmodifiableList(orderItems);
     }
 
     @Override

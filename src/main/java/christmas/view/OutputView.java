@@ -1,6 +1,7 @@
 package christmas.view;
 
 import christmas.domain.Order;
+import christmas.domain.OrderItem;
 import christmas.domain.VisitDate;
 import christmas.domain.menu.Menu;
 import christmas.domain.promotion.badge.Badge;
@@ -13,6 +14,8 @@ import java.util.Map.Entry;
 public class OutputView {
     private static final String NEW_LINE = "\n";
     private static final String DOUBLE_NEW_LINE = "\n\n";
+    private static final String EMPTY_SPACE = " ";
+    private static final String COUNT_UNIT = "개";
     private static final String GIFT_COUNT = " 1개";
     private final static String BENEFIT_DELIMITER = ": ";
     private final static String MINUS = "-";
@@ -25,7 +28,7 @@ public class OutputView {
         StringBuilder totalMessage = new StringBuilder();
         totalMessage.append(String.format("12월 %s일에 우테코 식당에서 받을 이벤트 혜택 미리 보기!", visitDate.toString()))
                 .append(DOUBLE_NEW_LINE);
-        totalMessage.append("<주문 메뉴>").append(NEW_LINE).append(order.toString()).append(DOUBLE_NEW_LINE);
+        addOrderSummary(totalMessage, order);
         addTotalPriceMessage(totalMessage, order.calculateTotalPrice());
         addGiftMenuMessage(totalMessage, benefitResult);
         addEachBenefitMessage(totalMessage, benefitResult);
@@ -33,6 +36,18 @@ public class OutputView {
         addDiscountedTotalPriceMessage(totalMessage, benefitManager.calculateDiscountedTotalPrice());
         totalMessage.append("<12월 이벤트 배지>").append(NEW_LINE).append(badge.getName());
         System.out.println(totalMessage);
+    }
+
+    private static void addOrderSummary(StringBuilder totalMessage, Order order) {
+        totalMessage.append("<주문 메뉴>").append(NEW_LINE);
+        for (OrderItem orderItem : order.getOrderItems()) {
+            totalMessage.append(orderItem.getMenuName())
+                    .append(EMPTY_SPACE)
+                    .append(orderItem.getCount())
+                    .append(COUNT_UNIT)
+                    .append(NEW_LINE);
+        }
+        totalMessage.append(NEW_LINE);
     }
 
     private static void addTotalPriceMessage(StringBuilder totalMessage, long totalPrice) {

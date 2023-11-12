@@ -47,6 +47,14 @@ public class OrderItem {
         return !(DRINK.equals(menu.getKind()));
     }
 
+    public String getMenuName() {
+        return menu.getName();
+    }
+
+    public int getCount() {
+        return count;
+    }
+
     @Override
     public boolean equals(Object other) {
         if (!(other instanceof OrderItem)) {
