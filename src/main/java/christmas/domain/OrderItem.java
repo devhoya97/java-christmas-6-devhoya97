@@ -53,10 +53,12 @@ public class OrderItem {
         return menu.isDrink();
     }
 
+    // OutputView를 위한 getter
     public String getMenuName() {
         return menu.getName();
     }
 
+    // OutputView를 위한 getter
     public int getCount() {
         return count;
     }
