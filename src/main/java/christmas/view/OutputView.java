@@ -42,7 +42,8 @@ public class OutputView {
     private static void addGuideMessage(StringBuilder totalMessage, String visitDate) {
         totalMessage.append("12월 ")
                 .append(visitDate)
-                .append("일에 우테코 식당에서 받을 이벤트 혜택 미리 보기!");
+                .append("일에 우테코 식당에서 받을 이벤트 혜택 미리 보기!")
+                .append(DOUBLE_NEW_LINE);
     }
 
     private static void addOrderItemsSummary(StringBuilder totalMessage, Order order) {
