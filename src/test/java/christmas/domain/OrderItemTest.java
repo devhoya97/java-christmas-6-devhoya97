@@ -11,6 +11,14 @@ import org.junit.jupiter.params.provider.ValueSource;
 
 class OrderItemTest {
 
+    @DisplayName("준비되지 않은 메뉴를 주문할 시 예외를 발생시킨다.")
+    @Test
+    void createOrderByNotPreparedMenu() {
+        assertThatThrownBy(() -> new OrderItem("깐풍기", 1))
+                .isInstanceOf(IllegalArgumentException.class)
+                .hasMessageContaining("[ERROR] 유효하지 않은 주문입니다. 다시 입력해 주세요.");
+    }
+
     @DisplayName("메뉴 개수가 1개 미만인 주문을 받으면 예외를 발생시킨다.")
     @ParameterizedTest
     @ValueSource(ints = {-5, -1, 0})
