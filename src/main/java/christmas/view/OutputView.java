@@ -16,7 +16,7 @@ public class OutputView {
     private static final String COUNT_UNIT = "개";
     private final static String BENEFIT_DELIMITER = ": ";
     private final static String MINUS = "-";
-    private final static String DECIMAL_FORMAT = "#,###";
+    private final static String THOUSAND_FORMAT = "#,###";
     private final static String MONEY_UNIT = "원";
     private static final String NOTHING = "없음";
     private final static long NO_BENEFIT = 0L;
@@ -64,7 +64,7 @@ public class OutputView {
     }
 
     private static String getThousandFormatPrice(long price) {
-        DecimalFormat thousandSeparator = new DecimalFormat(DECIMAL_FORMAT);
+        DecimalFormat thousandSeparator = new DecimalFormat(THOUSAND_FORMAT);
         return thousandSeparator.format(price);
     }
 
