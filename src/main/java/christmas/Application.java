@@ -17,6 +17,6 @@ public class Application {
         BadgePromotion badgePromotion = new BadgePromotion(benefitManager.calculateTotalBenefit());
         Badge badge = badgePromotion.getBadge();
 
-        OutputView.printResult(visitDate, order, benefitManager, badge);
+        OutputView.printResult(visitDate.toString(), order, benefitManager, badge);
     }
 }
