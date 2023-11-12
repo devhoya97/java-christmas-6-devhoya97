@@ -28,7 +28,7 @@ public class OutputView {
         StringBuilder totalMessage = new StringBuilder();
         totalMessage.append(String.format("12월 %s일에 우테코 식당에서 받을 이벤트 혜택 미리 보기!", visitDate.toString()))
                 .append(DOUBLE_NEW_LINE);
-        addOrderSummary(totalMessage, order);
+        addOrderItemsSummary(totalMessage, order);
         addTotalPriceMessage(totalMessage, order.calculateTotalPrice());
         addGiftMenuMessage(totalMessage, benefitResult);
         addEachBenefitMessage(totalMessage, benefitResult);
@@ -38,7 +38,7 @@ public class OutputView {
         System.out.println(totalMessage);
     }
 
-    private static void addOrderSummary(StringBuilder totalMessage, Order order) {
+    private static void addOrderItemsSummary(StringBuilder totalMessage, Order order) {
         totalMessage.append("<주문 메뉴>").append(NEW_LINE);
         for (OrderItem orderItem : order.getOrderItems()) {
             totalMessage.append(orderItem.getMenuName())
