@@ -1,12 +1,11 @@
 package christmas.domain;
 
-import static christmas.domain.utils.ErrorMessage.INVALID_MENU_ERROR;
+import static christmas.domain.utils.ErrorMessage.INVALID_ORDER_ERROR;
 
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
-import java.util.StringJoiner;
 
 public class Order {
     private static final int MAX_TOTAL_COUNT = 20;
@@ -25,7 +24,7 @@ public class Order {
             totalCount = orderItem.accumulateCount(totalCount);
         }
         if (totalCount > MAX_TOTAL_COUNT) {
-            throw new IllegalArgumentException(INVALID_MENU_ERROR);
+            throw new IllegalArgumentException(INVALID_ORDER_ERROR);
         }
     }
 
@@ -34,14 +33,14 @@ public class Order {
                 .filter(OrderItem::isNotDrink)
                 .count();
         if (notDrinkCount == 0) {
-            throw new IllegalArgumentException(INVALID_MENU_ERROR);
+            throw new IllegalArgumentException(INVALID_ORDER_ERROR);
         }
     }
 
     private void validateNotDuplicatedMenu(List<OrderItem> orderItems) {
         Set<OrderItem> uniqueOrderItems = new HashSet<>(orderItems);
         if (uniqueOrderItems.size() != orderItems.size()) {
-            throw new IllegalArgumentException(INVALID_MENU_ERROR);
+            throw new IllegalArgumentException(INVALID_ORDER_ERROR);
         }
     }
 

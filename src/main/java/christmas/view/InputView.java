@@ -1,7 +1,7 @@
 package christmas.view;
 
 import static christmas.domain.utils.ErrorMessage.INVALID_DATE_ERROR;
-import static christmas.domain.utils.ErrorMessage.INVALID_MENU_ERROR;
+import static christmas.domain.utils.ErrorMessage.INVALID_ORDER_ERROR;
 
 import camp.nextstep.edu.missionutils.Console;
 import christmas.domain.Order;
@@ -66,7 +66,7 @@ public class InputView {
     private static OrderItem organizeOrderItem(String menuNameWithCount) {
         String[] menuNameAndCount = menuNameWithCount.split(MENU_NAME_COUNT_DELIMITER);
         if (menuNameAndCount.length != MENU_NAME_AND_COUNT_ARRAY_SIZE) {
-            throw new IllegalArgumentException(INVALID_MENU_ERROR);
+            throw new IllegalArgumentException(INVALID_ORDER_ERROR);
         }
 
         String menuName = menuNameAndCount[MENU_NAME_INDEX].trim();
@@ -84,14 +84,14 @@ public class InputView {
                 return menu;
             }
         }
-        throw new IllegalArgumentException(INVALID_MENU_ERROR);
+        throw new IllegalArgumentException(INVALID_ORDER_ERROR);
     }
 
     private static int parseInputCountToInteger(String inputCount) {
         try {
             return Integer.parseInt(inputCount);
         } catch (NumberFormatException numberFormatException) {
-            throw new IllegalArgumentException(INVALID_MENU_ERROR);
+            throw new IllegalArgumentException(INVALID_ORDER_ERROR);
         }
     }
 }

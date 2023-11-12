@@ -1,7 +1,7 @@
 package christmas.domain;
 
 
-import static christmas.domain.utils.ErrorMessage.INVALID_MENU_ERROR;
+import static christmas.domain.utils.ErrorMessage.INVALID_ORDER_ERROR;
 
 import christmas.domain.menu.Menu;
 import java.util.Objects;
@@ -23,7 +23,7 @@ public class OrderItem {
 
     private void validateCount(int count) {
         if (count < MIN_COUNT) {
-            throw new IllegalArgumentException(String.format(INVALID_MENU_ERROR));
+            throw new IllegalArgumentException(String.format(INVALID_ORDER_ERROR));
         }
     }
 
