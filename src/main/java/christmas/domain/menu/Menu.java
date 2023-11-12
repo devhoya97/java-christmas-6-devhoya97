@@ -35,4 +35,16 @@ public enum Menu {
     public long getPrice() {
         return price;
     }
+
+    public boolean isMain() {
+        return "메인".equals(this.getKind());
+    }
+
+    public boolean isDessert() {
+        return "디저트".equals(this.getKind());
+    }
+
+    public boolean isDrink() {
+        return "음료".equals(this.getKind());
+    }
 }

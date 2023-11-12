@@ -7,9 +7,6 @@ import christmas.domain.menu.Menu;
 import java.util.Objects;
 
 public class OrderItem {
-    private static final String MAIN = "메인";
-    private static final String DESSERT = "디저트";
-    private static final String DRINK = "음료";
     private static final int MIN_COUNT = 1;
 
     private final Menu menu;
@@ -36,15 +33,15 @@ public class OrderItem {
     }
 
     public boolean isMain() {
-        return MAIN.equals(menu.getKind());
+        return menu.isMain();
     }
 
     public boolean isDessert() {
-        return DESSERT.equals(menu.getKind());
+        return menu.isDessert();
     }
 
-    public boolean isNotDrink() {
-        return !(DRINK.equals(menu.getKind()));
+    public boolean isDrink() {
+        return menu.isDrink();
     }
 
     public String getMenuName() {

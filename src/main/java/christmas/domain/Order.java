@@ -30,7 +30,7 @@ public class Order {
 
     private void validateNotOnlyDrink(List<OrderItem> orderItems) {
         long notDrinkCount = orderItems.stream()
-                .filter(OrderItem::isNotDrink)
+                .filter(orderItem -> !(orderItem.isDrink()))
                 .count();
         if (notDrinkCount == 0) {
             throw new IllegalArgumentException(INVALID_ORDER_ERROR);
