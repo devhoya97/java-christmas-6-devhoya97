@@ -60,12 +60,9 @@ public class OrderItem {
         if (!(other instanceof OrderItem)) {
             return false;
         }
-        String menuName = menu.getName();
-
         OrderItem otherOrderItem = (OrderItem) other;
-        String otherMenuName = otherOrderItem.menu.getName();
 
-        return menuName.equals(otherMenuName);
+        return menu == otherOrderItem.menu;
     }
 
     @Override
