@@ -10,7 +10,6 @@ import java.util.StringJoiner;
 
 public class Order {
     private static final int MAX_TOTAL_COUNT = 20;
-    private static final String NEW_LINE = "\n";
     List<OrderItem> orderItems;
 
     public Order(List<OrderItem> orderItems) {
@@ -74,14 +73,5 @@ public class Order {
 
     public List<OrderItem> getOrderItems() {
         return Collections.unmodifiableList(orderItems);
-    }
-
-    @Override
-    public String toString() {
-        StringJoiner orderResult = new StringJoiner(NEW_LINE);
-        orderItems.stream()
-                .map(OrderItem::toString)
-                .forEach(orderResult::add);
-        return orderResult.toString();
     }
 }

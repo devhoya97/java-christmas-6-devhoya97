@@ -72,9 +72,4 @@ public class OrderItem {
     public int hashCode() {
         return Objects.hashCode(menu.getName());
     }
-
-    @Override
-    public String toString() {
-        return menu.getName() + " " + count + "개";
-    }
 }
