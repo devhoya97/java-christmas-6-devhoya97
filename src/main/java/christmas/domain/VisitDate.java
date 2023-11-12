@@ -3,8 +3,8 @@ package christmas.domain;
 import static christmas.domain.utils.ErrorMessage.INVALID_DATE_ERROR;
 
 public class VisitDate {
-    private static final int MIN_DAY = 1;
-    private static final int MAX_DAY = 31;
+    private static final int FIRST_DAY = 1;
+    private static final int FINAL_DAY = 31;
     private static final int CHRISTMAS = 25;
     private static final int FRIDAY_REMAIN = 1;
     private static final int SATURDAY_REMAIN = 2;
@@ -17,7 +17,7 @@ public class VisitDate {
     }
 
     private void validateDecember(int visitDate) {
-        if (visitDate < MIN_DAY || visitDate > MAX_DAY) {
+        if (visitDate < FIRST_DAY || visitDate > FINAL_DAY) {
             throw new IllegalArgumentException(INVALID_DATE_ERROR);
         }
     }
@@ -40,8 +40,8 @@ public class VisitDate {
         return (remain == SUNDAY_REMAIN) || (visitDate == CHRISTMAS);
     }
 
-    public int getDifferenceFromMinDay() {
-        return visitDate - MIN_DAY;
+    public int getDifferenceFromFirstDay() {
+        return visitDate - FIRST_DAY;
     }
 
     @Override

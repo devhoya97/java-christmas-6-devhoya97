@@ -75,7 +75,7 @@ class VisitDateTest {
         // given
         VisitDate visitDate = new VisitDate(day);
         // when
-        int differenceFromMinDay = visitDate.getDifferenceFromMinDay();
+        int differenceFromMinDay = visitDate.getDifferenceFromFirstDay();
         // then
         assertThat(differenceFromMinDay).isEqualTo(expectedResult);
     }

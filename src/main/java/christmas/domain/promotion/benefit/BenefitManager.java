@@ -9,8 +9,8 @@ import java.util.Map;
 import java.util.Map.Entry;
 
 public class BenefitManager {
-    private static final long PROMOTION_THRESHOLD = 10000;
-    private static final long GIFT_THRESHOLD = 120000;
+    private static final long MIN_TOTAL_PRICE_FOR_DISCOUNT = 10000;
+    private static final long MIN_TOTAL_PRICE_FOR_GIFT = 120000;
     private static final long DEFAULT_DISCOUNT = 1000;
     private static final long INCREASING_DISCOUNT = 100;
     private static final long DISCOUNT_PER_MENU = 2023;
@@ -35,38 +35,38 @@ public class BenefitManager {
     }
 
     private void calculateChristmasDiscount() {
-        if (visitDate.isInChristmasPromotion() && (order.calculateTotalPrice() >= PROMOTION_THRESHOLD)) {
-            long discount = DEFAULT_DISCOUNT + (visitDate.getDifferenceFromMinDay() * INCREASING_DISCOUNT);
+        if (visitDate.isInChristmasPromotion() && (order.calculateTotalPrice() >= MIN_TOTAL_PRICE_FOR_DISCOUNT)) {
+            long discount = DEFAULT_DISCOUNT + (INCREASING_DISCOUNT * visitDate.getDifferenceFromFirstDay());
             benefitResult.put(Benefit.CHRISTMAS, discount);
         }
     }
 
     private void calculateWeekDayDiscount() {
         int dessertCount = order.countDesserts();
-        if ((visitDate.isInWeekDayPromotion()) && (order.calculateTotalPrice() >= PROMOTION_THRESHOLD)
+        if ((visitDate.isInWeekDayPromotion()) && (order.calculateTotalPrice() >= MIN_TOTAL_PRICE_FOR_DISCOUNT)
                 && (dessertCount != NO_COUNT)) {
-            long discount = dessertCount * DISCOUNT_PER_MENU;
+            long discount = DISCOUNT_PER_MENU * dessertCount;
             benefitResult.put(Benefit.WEEK_DAY, discount);
         }
     }
 
     private void calculateWeekendDiscount() {
         int mainCount = order.countMains();
-        if ((visitDate.isInWeekendPromotion()) && (order.calculateTotalPrice() >= PROMOTION_THRESHOLD)
+        if ((visitDate.isInWeekendPromotion()) && (order.calculateTotalPrice() >= MIN_TOTAL_PRICE_FOR_DISCOUNT)
                 && mainCount != NO_COUNT) {
-            long discount = mainCount * DISCOUNT_PER_MENU;
+            long discount = DISCOUNT_PER_MENU * mainCount;
             benefitResult.put(Benefit.WEEKEND, discount);
         }
     }
 
     private void calculateSpecialDiscount() {
-        if ((visitDate.isInSpecialPromotion()) && (order.calculateTotalPrice() >= PROMOTION_THRESHOLD)) {
+        if ((visitDate.isInSpecialPromotion()) && (order.calculateTotalPrice() >= MIN_TOTAL_PRICE_FOR_DISCOUNT)) {
             benefitResult.put(Benefit.SPECIAL, DEFAULT_DISCOUNT);
         }
     }
 
     private void calculateGiftBenefit() {
-        if (order.calculateTotalPrice() >= GIFT_THRESHOLD) {
+        if (order.calculateTotalPrice() >= MIN_TOTAL_PRICE_FOR_GIFT) {
             long benefit = Menu.CHAMPAGNE.getPrice();
             benefitResult.put(Benefit.GIFT, benefit);
         }
