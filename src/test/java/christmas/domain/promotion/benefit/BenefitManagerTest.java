@@ -16,7 +16,7 @@ class BenefitManagerTest {
 
     @DisplayName("모든 할인 혜택을 적용한 결과를 반환한다.")
     @ParameterizedTest
-    @CsvSource({"1,1000,0,10115,0,25000", "3,1200,8092,0,1000,25000", "27,0,8092,0,0,25000"})
+    @CsvSource({"1,1_000,0,10_115,0,25_000", "3,1_200,8_092,0,1_000,25_000", "27,0,8_092,0,0,25_000"})
     void getResult(int day, long expectedChristmasDiscount, long expectedWeekDayDiscount,
                    long expectedWeekendDiscount, long expectedSpecialDiscount, long expectedGiftDiscount) {
         // given
@@ -41,7 +41,7 @@ class BenefitManagerTest {
 
     @DisplayName("할인 후 예상 결제 금액을 계산한다.")
     @ParameterizedTest
-    @CsvSource({"1,211385", "3,212208", "27,214408"})
+    @CsvSource({"1,211_385", "3,212_208", "27,214_408"})
     void calculateTotalDiscountedPrice(int day, long expectedResult) {
         // given
         OrderItem tapas = new OrderItem(Menu.TAPAS, 1);
@@ -59,7 +59,7 @@ class BenefitManagerTest {
 
     @DisplayName("총혜택 금액을 계산한다.")
     @ParameterizedTest
-    @CsvSource({"1,36115", "3,35292", "27,33092"})
+    @CsvSource({"1,36_115", "3,35_292", "27,33_092"})
     void calculateTotalDiscount(int day, long expectedResult) {
         // given
         OrderItem tapas = new OrderItem(Menu.TAPAS, 1);

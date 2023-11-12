@@ -9,11 +9,11 @@ import java.util.Map;
 import java.util.Map.Entry;
 
 public class BenefitManager {
-    private static final long MIN_TOTAL_PRICE_FOR_DISCOUNT = 10000;
-    private static final long MIN_TOTAL_PRICE_FOR_GIFT = 120000;
-    private static final long DEFAULT_DISCOUNT = 1000;
+    private static final long MIN_TOTAL_PRICE_FOR_DISCOUNT = 10_000;
+    private static final long MIN_TOTAL_PRICE_FOR_GIFT = 120_000;
+    private static final long DEFAULT_DISCOUNT = 1_000;
     private static final long INCREASING_DISCOUNT = 100;
-    private static final long DISCOUNT_PER_MENU = 2023;
+    private static final long DISCOUNT_PER_MENU = 2_023;
     private static final long NO_COUNT = 0;
 
     private final VisitDate visitDate;

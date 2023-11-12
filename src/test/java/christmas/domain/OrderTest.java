@@ -57,7 +57,7 @@ class OrderTest {
         OrderItem chocoCake = new OrderItem(Menu.CHOCO_CAKE, 3);
         OrderItem zeroCoke = new OrderItem(Menu.ZERO_COKE, 4);
         Order order = new Order(List.of(tapas, christmasPasta, chocoCake, zeroCoke));
-        long expectedResult = 5500 + 50000 + 45000 + 12000;
+        long expectedResult = 5_500L + 50_000L + 45_000L + 12_000L;
         // when
         long totalPrice = order.calculateTotalPrice();
         // then

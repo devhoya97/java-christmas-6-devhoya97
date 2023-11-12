@@ -25,7 +25,7 @@ class OrderItemTest {
     void calculatePrice() {
         // given
         OrderItem orderItem = new OrderItem(Menu.MUSHROOM_SOUP, 3);
-        long expectedPrice = 18000;
+        long expectedPrice = 18_000;
         // when
         long price =  orderItem.calculatePrice();
         // then
