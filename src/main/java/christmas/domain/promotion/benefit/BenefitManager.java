@@ -37,7 +37,7 @@ public class BenefitManager {
     private void calculateChristmasDiscount() {
         if (visitDate.isInChristmasPromotion() && (order.calculateTotalPrice() >= MIN_TOTAL_PRICE_FOR_DISCOUNT)) {
             long discount = DEFAULT_DISCOUNT + (INCREASING_DISCOUNT * visitDate.getDifferenceFromFirstDay());
-            benefitResult.put(Benefit.CHRISTMAS, discount);
+            benefitResult.put(Benefit.CHRISTMAS_DISCOUNT, discount);
         }
     }
 
@@ -46,7 +46,7 @@ public class BenefitManager {
         if ((visitDate.isInWeekDayPromotion()) && (order.calculateTotalPrice() >= MIN_TOTAL_PRICE_FOR_DISCOUNT)
                 && (dessertCount != NO_COUNT)) {
             long discount = DISCOUNT_PER_MENU * dessertCount;
-            benefitResult.put(Benefit.WEEK_DAY, discount);
+            benefitResult.put(Benefit.WEEK_DAY_DISCOUNT, discount);
         }
     }
 
@@ -55,20 +55,20 @@ public class BenefitManager {
         if ((visitDate.isInWeekendPromotion()) && (order.calculateTotalPrice() >= MIN_TOTAL_PRICE_FOR_DISCOUNT)
                 && mainCount != NO_COUNT) {
             long discount = DISCOUNT_PER_MENU * mainCount;
-            benefitResult.put(Benefit.WEEKEND, discount);
+            benefitResult.put(Benefit.WEEKEND_DISCOUNT, discount);
         }
     }
 
     private void calculateSpecialDiscount() {
         if ((visitDate.isInSpecialPromotion()) && (order.calculateTotalPrice() >= MIN_TOTAL_PRICE_FOR_DISCOUNT)) {
-            benefitResult.put(Benefit.SPECIAL, DEFAULT_DISCOUNT);
+            benefitResult.put(Benefit.SPECIAL_DISCOUNT, DEFAULT_DISCOUNT);
         }
     }
 
     private void calculateGiftBenefit() {
         if (order.calculateTotalPrice() >= MIN_TOTAL_PRICE_FOR_GIFT) {
             long benefit = Menu.CHAMPAGNE.getPrice();
-            benefitResult.put(Benefit.GIFT, benefit);
+            benefitResult.put(Benefit.GIFT_GIVING, benefit);
         }
     }
 
@@ -80,7 +80,7 @@ public class BenefitManager {
         // 증정 이벤트로 받은 혜택은 할인 후 예상 결제 금액에 영향을 미치지 않으므로 배제한다.
         long totalDiscount = benefitResult.entrySet()
                 .stream()
-                .filter(entry -> entry.getKey() != Benefit.GIFT)
+                .filter(entry -> entry.getKey() != Benefit.GIFT_GIVING)
                 .mapToLong(Entry::getValue)
                 .sum();
         return order.calculateTotalPrice() - totalDiscount;

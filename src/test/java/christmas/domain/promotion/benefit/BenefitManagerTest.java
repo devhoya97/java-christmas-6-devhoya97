@@ -32,11 +32,11 @@ class BenefitManagerTest {
         // when
         Map<Benefit, Long> discountResult = benefitManager.getBenefitResult();
         // then
-        assertThat(discountResult.getOrDefault(Benefit.CHRISTMAS, 0L)).isEqualTo(expectedChristmasDiscount);
-        assertThat(discountResult.getOrDefault(Benefit.WEEK_DAY, 0L)).isEqualTo(expectedWeekDayDiscount);
-        assertThat(discountResult.getOrDefault(Benefit.WEEKEND, 0L)).isEqualTo(expectedWeekendDiscount);
-        assertThat(discountResult.getOrDefault(Benefit.SPECIAL, 0L)).isEqualTo(expectedSpecialDiscount);
-        assertThat(discountResult.getOrDefault(Benefit.GIFT, 0L)).isEqualTo(expectedGiftDiscount);
+        assertThat(discountResult.getOrDefault(Benefit.CHRISTMAS_DISCOUNT, 0L)).isEqualTo(expectedChristmasDiscount);
+        assertThat(discountResult.getOrDefault(Benefit.WEEK_DAY_DISCOUNT, 0L)).isEqualTo(expectedWeekDayDiscount);
+        assertThat(discountResult.getOrDefault(Benefit.WEEKEND_DISCOUNT, 0L)).isEqualTo(expectedWeekendDiscount);
+        assertThat(discountResult.getOrDefault(Benefit.SPECIAL_DISCOUNT, 0L)).isEqualTo(expectedSpecialDiscount);
+        assertThat(discountResult.getOrDefault(Benefit.GIFT_GIVING, 0L)).isEqualTo(expectedGiftDiscount);
     }
 
     @DisplayName("할인 후 예상 결제 금액을 계산한다.")

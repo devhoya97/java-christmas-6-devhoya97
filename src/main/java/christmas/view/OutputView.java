@@ -2,8 +2,6 @@ package christmas.view;
 
 import christmas.domain.Order;
 import christmas.domain.OrderItem;
-import christmas.domain.VisitDate;
-import christmas.domain.menu.Menu;
 import christmas.domain.promotion.badge.Badge;
 import christmas.domain.promotion.benefit.Benefit;
 import christmas.domain.promotion.benefit.BenefitManager;
@@ -72,8 +70,8 @@ public class OutputView {
 
     private static void addGiftMenuMessage(StringBuilder totalMessage, Map<Benefit, Long> benefitResult) {
         totalMessage.append("<증정 메뉴>").append(NEW_LINE);
-        if (benefitResult.containsKey(Benefit.GIFT)) {
-            totalMessage.append(Benefit.GIFT.getGift()).append(DOUBLE_NEW_LINE);
+        if (benefitResult.containsKey(Benefit.GIFT_GIVING)) {
+            totalMessage.append(Benefit.GIFT_GIVING.getGift()).append(DOUBLE_NEW_LINE);
             return;
         }
         totalMessage.append(NOTHING).append(DOUBLE_NEW_LINE);
