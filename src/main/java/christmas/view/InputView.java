@@ -70,21 +70,9 @@ public class InputView {
         }
 
         String menuName = menuNameAndCount[MENU_NAME_INDEX].trim();
-        Menu menu = findPreparedMenu(menuName);
-
         String inputCount = menuNameAndCount[COUNT_INDEX].trim();
-        int count = parseInputCountToInteger(inputCount);
 
-        return new OrderItem(menu, count);
-    }
-
-    private static Menu findPreparedMenu(String menuName) {
-        for (Menu menu : Menu.values()) {
-            if (menuName.equals(menu.getName())) {
-                return menu;
-            }
-        }
-        throw new IllegalArgumentException(INVALID_ORDER_ERROR);
+        return new OrderItem(menuName, parseInputCountToInteger(inputCount));
     }
 
     private static int parseInputCountToInteger(String inputCount) {

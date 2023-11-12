@@ -12,10 +12,19 @@ public class OrderItem {
     private final Menu menu;
     private final int count;
 
-    public OrderItem(Menu menu, int count) {
+    public OrderItem(String menuName, int count) {
+        this.menu = findPreparedMenu(menuName);
         validateCount(count);
-        this.menu = menu;
         this.count = count;
+    }
+
+    private Menu findPreparedMenu(String menuName) {
+        for (Menu menu : Menu.values()) {
+            if (menuName.equals(menu.getName())) {
+                return menu;
+            }
+        }
+        throw new IllegalArgumentException(INVALID_ORDER_ERROR);
     }
 
     private void validateCount(int count) {

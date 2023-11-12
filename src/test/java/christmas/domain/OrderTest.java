@@ -14,10 +14,10 @@ class OrderTest {
     @Test
     void createOrderOverMaxNumber() {
         // given
-        OrderItem tapas = new OrderItem(Menu.TAPAS, 5);
-        OrderItem christmasPasta = new OrderItem(Menu.CHRISTMAS_PASTA, 5);
-        OrderItem chocoCake = new OrderItem(Menu.CHOCO_CAKE, 5);
-        OrderItem zeroCoke = new OrderItem(Menu.ZERO_COKE, 6);
+        OrderItem tapas = new OrderItem("타파스", 5);
+        OrderItem christmasPasta = new OrderItem("크리스마스파스타", 5);
+        OrderItem chocoCake = new OrderItem("초코케이크", 5);
+        OrderItem zeroCoke = new OrderItem("제로콜라", 6);
         // when, then
         assertThatThrownBy(() -> new Order(List.of(tapas, christmasPasta, chocoCake, zeroCoke)))
                 .isInstanceOf(IllegalArgumentException.class)
@@ -28,8 +28,8 @@ class OrderTest {
     @Test
     void createOnlyDrinkOrder() {
         // given
-        OrderItem zeroCoke = new OrderItem(Menu.ZERO_COKE, 5);
-        OrderItem redWine = new OrderItem(Menu.RED_WINE, 1);
+        OrderItem zeroCoke = new OrderItem("제로콜라", 5);
+        OrderItem redWine = new OrderItem("레드와인", 1);
         // when, then
         assertThatThrownBy(() -> new Order(List.of(zeroCoke, redWine)))
                 .isInstanceOf(IllegalArgumentException.class)
@@ -40,8 +40,8 @@ class OrderTest {
     @Test
     void createOrderByDuplicatedMenu() {
         // given
-        OrderItem caesarSalad = new OrderItem(Menu.CAESAR_SALAD, 5);
-        OrderItem otherCaesarSalad = new OrderItem(Menu.CAESAR_SALAD, 1);
+        OrderItem caesarSalad = new OrderItem("시저샐러드", 5);
+        OrderItem otherCaesarSalad = new OrderItem("시저샐러드", 1);
         // when, then
         assertThatThrownBy(() -> new Order(List.of(caesarSalad, otherCaesarSalad)))
                 .isInstanceOf(IllegalArgumentException.class)
@@ -52,10 +52,10 @@ class OrderTest {
     @Test
     void calculateTotalPrice() {
         // given
-        OrderItem tapas = new OrderItem(Menu.TAPAS, 1);
-        OrderItem christmasPasta = new OrderItem(Menu.CHRISTMAS_PASTA, 2);
-        OrderItem chocoCake = new OrderItem(Menu.CHOCO_CAKE, 3);
-        OrderItem zeroCoke = new OrderItem(Menu.ZERO_COKE, 4);
+        OrderItem tapas = new OrderItem("타파스", 1);
+        OrderItem christmasPasta = new OrderItem("크리스마스파스타", 2);
+        OrderItem chocoCake = new OrderItem("초코케이크", 3);
+        OrderItem zeroCoke = new OrderItem("제로콜라", 4);
         Order order = new Order(List.of(tapas, christmasPasta, chocoCake, zeroCoke));
         long expectedResult = 5_500L + 50_000L + 45_000L + 12_000L;
         // when
@@ -68,11 +68,11 @@ class OrderTest {
     @Test
     void countDesserts() {
         // given
-        OrderItem tapas = new OrderItem(Menu.TAPAS, 1);
-        OrderItem christmasPasta = new OrderItem(Menu.CHRISTMAS_PASTA, 2);
-        OrderItem chocoCake = new OrderItem(Menu.CHOCO_CAKE, 3);
-        OrderItem iceCream = new OrderItem(Menu.ICE_CREAM, 1);
-        OrderItem zeroCoke = new OrderItem(Menu.ZERO_COKE, 4);
+        OrderItem tapas = new OrderItem("타파스", 1);
+        OrderItem christmasPasta = new OrderItem("크리스마스파스타", 2);
+        OrderItem chocoCake = new OrderItem("초코케이크", 3);
+        OrderItem iceCream = new OrderItem("아이스크림", 1);
+        OrderItem zeroCoke = new OrderItem("제로콜라", 4);
         Order order = new Order(List.of(tapas, christmasPasta, chocoCake, iceCream, zeroCoke));
         long expectedResult = 4;
         // when, then
@@ -83,11 +83,11 @@ class OrderTest {
     @Test
     void countMains() {
         // given
-        OrderItem tapas = new OrderItem(Menu.TAPAS, 1);
-        OrderItem christmasPasta = new OrderItem(Menu.CHRISTMAS_PASTA, 2);
-        OrderItem TBoneSteak = new OrderItem(Menu.T_BONE_STEAK, 3);
-        OrderItem iceCream = new OrderItem(Menu.ICE_CREAM, 1);
-        OrderItem zeroCoke = new OrderItem(Menu.ZERO_COKE, 2);
+        OrderItem tapas = new OrderItem("타파스", 1);
+        OrderItem christmasPasta = new OrderItem("크리스마스파스타", 2);
+        OrderItem TBoneSteak = new OrderItem("티본스테이크", 3);
+        OrderItem iceCream = new OrderItem("아이스크림", 1);
+        OrderItem zeroCoke = new OrderItem("제로콜라", 2);
         Order order = new Order(List.of(tapas, christmasPasta, TBoneSteak, iceCream, zeroCoke));
         long expectedResult = 5;
         // when, then

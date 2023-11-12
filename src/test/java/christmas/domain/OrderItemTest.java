@@ -15,7 +15,7 @@ class OrderItemTest {
     @ParameterizedTest
     @ValueSource(ints = {-5, -1, 0})
     void createOrderByLessThanOne(int number) {
-        assertThatThrownBy(() -> new OrderItem(Menu.BBQ_RIBS, number))
+        assertThatThrownBy(() -> new OrderItem("바비큐립", number))
                 .isInstanceOf(IllegalArgumentException.class)
                 .hasMessageContaining("[ERROR] 유효하지 않은 주문입니다. 다시 입력해 주세요.");
     }
@@ -24,7 +24,7 @@ class OrderItemTest {
     @Test
     void calculatePrice() {
         // given
-        OrderItem orderItem = new OrderItem(Menu.MUSHROOM_SOUP, 3);
+        OrderItem orderItem = new OrderItem("양송이수프", 3);
         long expectedPrice = 18_000;
         // when
         long price =  orderItem.calculatePrice();
@@ -36,8 +36,8 @@ class OrderItemTest {
     @Test
     void isDessert() {
         // given
-        OrderItem orderItem = new OrderItem(Menu.CHOCO_CAKE, 1);
-        OrderItem otherOrderItem = new OrderItem(Menu.CHRISTMAS_PASTA, 1);
+        OrderItem orderItem = new OrderItem("초코케이크", 1);
+        OrderItem otherOrderItem = new OrderItem("크리스마스파스타", 1);
         // when, then
         assertThat(orderItem.isDessert()).isEqualTo(true);
         assertThat(otherOrderItem.isDessert()).isEqualTo(false);
@@ -47,8 +47,8 @@ class OrderItemTest {
     @Test
     void isMain() {
         // given
-        OrderItem orderItem = new OrderItem(Menu.BBQ_RIBS, 1);
-        OrderItem otherOrderItem = new OrderItem(Menu.TAPAS, 1);
+        OrderItem orderItem = new OrderItem("바비큐립", 1);
+        OrderItem otherOrderItem = new OrderItem("타파스", 1);
         // when, then
         assertThat(orderItem.isMain()).isEqualTo(true);
         assertThat(otherOrderItem.isMain()).isEqualTo(false);
