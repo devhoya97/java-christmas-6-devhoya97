@@ -16,64 +16,52 @@ public class BenefitManager {
     private static final long DISCOUNT_PER_MENU = 2_023;
     private static final long NO_COUNT = 0;
 
-    private final VisitDate visitDate;
-    private final Order order;
     private final Map<Benefit, Long> benefitResult = new HashMap<>();
+    private final long totalPrice;
 
     public BenefitManager(VisitDate visitDate, Order order) {
-        this.visitDate = visitDate;
-        this.order = order;
-        calculateBenefitResult();
+        totalPrice = order.calculateTotalPrice();
+        if (totalPrice >= MIN_TOTAL_PRICE_FOR_DISCOUNT) {
+            addChristmasDiscount(visitDate.isInChristmasPromotion(), visitDate.getDifferenceFromFirstDay());
+            addWeekDayDiscount(visitDate.isInWeekDayPromotion(), order.countDesserts());
+            addWeekendDiscount(visitDate.isInWeekendPromotion(), order.countMains());
+            addSpecialDiscount(visitDate.isInSpecialPromotion());
+        }
+        if (totalPrice >= MIN_TOTAL_PRICE_FOR_GIFT) {
+            addGiftBenefit();
+        }
     }
 
-    private void calculateBenefitResult() {
-        calculateChristmasDiscount();
-        calculateWeekDayDiscount();
-        calculateWeekendDiscount();
-        calculateSpecialDiscount();
-        calculateGiftBenefit();
-    }
-
-    private void calculateChristmasDiscount() {
-        if (visitDate.isInChristmasPromotion() && (order.calculateTotalPrice() >= MIN_TOTAL_PRICE_FOR_DISCOUNT)) {
-            long discount = DEFAULT_DISCOUNT + (INCREASING_DISCOUNT * visitDate.getDifferenceFromFirstDay());
+    private void addChristmasDiscount(boolean isInChristmasPromotion, int differenceFromFirstDay) {
+        if (isInChristmasPromotion) {
+            long discount = DEFAULT_DISCOUNT + (INCREASING_DISCOUNT * differenceFromFirstDay);
             benefitResult.put(Benefit.CHRISTMAS_DISCOUNT, discount);
         }
     }
 
-    private void calculateWeekDayDiscount() {
-        int dessertCount = order.countDesserts();
-        if ((visitDate.isInWeekDayPromotion()) && (order.calculateTotalPrice() >= MIN_TOTAL_PRICE_FOR_DISCOUNT)
-                && (dessertCount != NO_COUNT)) {
+    private void addWeekDayDiscount(boolean isInWeekDayPromotion, int dessertCount) {
+        if (isInWeekDayPromotion && (dessertCount != NO_COUNT)) {
             long discount = DISCOUNT_PER_MENU * dessertCount;
             benefitResult.put(Benefit.WEEK_DAY_DISCOUNT, discount);
         }
     }
 
-    private void calculateWeekendDiscount() {
-        int mainCount = order.countMains();
-        if ((visitDate.isInWeekendPromotion()) && (order.calculateTotalPrice() >= MIN_TOTAL_PRICE_FOR_DISCOUNT)
-                && mainCount != NO_COUNT) {
+    private void addWeekendDiscount(boolean isInWeekendPromotion, int mainCount) {
+        if (isInWeekendPromotion && (mainCount != NO_COUNT)) {
             long discount = DISCOUNT_PER_MENU * mainCount;
             benefitResult.put(Benefit.WEEKEND_DISCOUNT, discount);
         }
     }
 
-    private void calculateSpecialDiscount() {
-        if ((visitDate.isInSpecialPromotion()) && (order.calculateTotalPrice() >= MIN_TOTAL_PRICE_FOR_DISCOUNT)) {
+    private void addSpecialDiscount(boolean isInSpecialPromotion) {
+        if (isInSpecialPromotion) {
             benefitResult.put(Benefit.SPECIAL_DISCOUNT, DEFAULT_DISCOUNT);
         }
     }
 
-    private void calculateGiftBenefit() {
-        if (order.calculateTotalPrice() >= MIN_TOTAL_PRICE_FOR_GIFT) {
-            long benefit = Menu.CHAMPAGNE.getPrice();
-            benefitResult.put(Benefit.GIFT_GIVING, benefit);
-        }
-    }
-
-    public Map<Benefit, Long> getBenefitResult() {
-        return Collections.unmodifiableMap(benefitResult);
+    private void addGiftBenefit() {
+        long giftPrice = Menu.CHAMPAGNE.getPrice();
+        benefitResult.put(Benefit.GIFT_GIVING, giftPrice);
     }
 
     public long calculateDiscountedTotalPrice() {
@@ -83,7 +71,7 @@ public class BenefitManager {
                 .filter(entry -> entry.getKey() != Benefit.GIFT_GIVING)
                 .mapToLong(Entry::getValue)
                 .sum();
-        return order.calculateTotalPrice() - totalDiscount;
+        return totalPrice - totalDiscount;
     }
 
     public long calculateTotalBenefit() {
@@ -91,5 +79,9 @@ public class BenefitManager {
                 .stream()
                 .mapToLong(benefitPrice -> benefitPrice)
                 .sum();
+    }
+
+    public Map<Benefit, Long> getBenefitResult() {
+        return Collections.unmodifiableMap(benefitResult);
     }
 }
