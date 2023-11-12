@@ -16,7 +16,6 @@ public class OutputView {
     private static final String DOUBLE_NEW_LINE = "\n\n";
     private static final String EMPTY_SPACE = " ";
     private static final String COUNT_UNIT = "개";
-    private static final String GIFT_COUNT = "1";
     private final static String BENEFIT_DELIMITER = ": ";
     private final static String MINUS = "-";
     private final static String DECIMAL_FORMAT = "#,###";
@@ -74,11 +73,7 @@ public class OutputView {
     private static void addGiftMenuMessage(StringBuilder totalMessage, Map<Benefit, Long> benefitResult) {
         totalMessage.append("<증정 메뉴>").append(NEW_LINE);
         if (benefitResult.containsKey(Benefit.GIFT)) {
-            totalMessage.append(Menu.CHAMPAGNE.getName())
-                    .append(EMPTY_SPACE)
-                    .append(GIFT_COUNT)
-                    .append(COUNT_UNIT)
-                    .append(DOUBLE_NEW_LINE);
+            totalMessage.append(Benefit.GIFT.getGift()).append(DOUBLE_NEW_LINE);
             return;
         }
         totalMessage.append(NOTHING).append(DOUBLE_NEW_LINE);
