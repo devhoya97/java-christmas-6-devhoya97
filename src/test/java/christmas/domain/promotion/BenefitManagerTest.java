@@ -17,7 +17,7 @@ class BenefitManagerTest {
     @ParameterizedTest
     @CsvSource({"1,1_000,0,10_115,0,25_000", "3,1_200,8_092,0,1_000,25_000", "27,0,8_092,0,0,25_000"})
     void getResult(int day, long expectedChristmasDiscount, long expectedWeekDayDiscount,
-                   long expectedWeekendDiscount, long expectedSpecialDiscount, long expectedGiftDiscount) {
+                   long expectedWeekendDiscount, long expectedSpecialDiscount, long expectedGiftBenefit) {
         // given
         OrderItem tapas = new OrderItem("타파스", 1);
         OrderItem christmasPasta = new OrderItem("크리스마스파스타", 2);
@@ -35,7 +35,7 @@ class BenefitManagerTest {
         assertThat(discountResult.getOrDefault(Benefit.WEEK_DAY_DISCOUNT, 0L)).isEqualTo(expectedWeekDayDiscount);
         assertThat(discountResult.getOrDefault(Benefit.WEEKEND_DISCOUNT, 0L)).isEqualTo(expectedWeekendDiscount);
         assertThat(discountResult.getOrDefault(Benefit.SPECIAL_DISCOUNT, 0L)).isEqualTo(expectedSpecialDiscount);
-        assertThat(discountResult.getOrDefault(Benefit.GIFT_GIVING, 0L)).isEqualTo(expectedGiftDiscount);
+        assertThat(discountResult.getOrDefault(Benefit.GIFT_GIVING, 0L)).isEqualTo(expectedGiftBenefit);
     }
 
     @DisplayName("할인 후 예상 결제 금액을 계산한다.")
