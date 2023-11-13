@@ -7,7 +7,6 @@ import camp.nextstep.edu.missionutils.Console;
 import christmas.domain.Order;
 import christmas.domain.OrderItem;
 import christmas.domain.VisitDate;
-import christmas.domain.menu.Menu;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -17,9 +16,10 @@ public class InputView {
     private static final int MENU_NAME_INDEX = 0;
     private static final int COUNT_INDEX = 1;
     private static final int MENU_NAME_AND_COUNT_ARRAY_SIZE = 2;
+
     public static VisitDate readDate() {
         System.out.println("12월 중 식당 예상 방문 날짜는 언제인가요? (숫자만 입력해 주세요!)");
-        while(true) {
+        while (true) {
             String inputDate = getTrimmedInput();
             try {
                 int date = parseInputDateToInteger(inputDate);
@@ -45,7 +45,7 @@ public class InputView {
 
     public static Order readOrder() {
         System.out.println("주문하실 메뉴를 메뉴와 개수를 알려주세요. (e.g. 해산물파스타-2,레드와인-1,초코케이크-1)");
-        while(true) {
+        while (true) {
             String inputOrder = getTrimmedInput();
             try {
                 return parseInputToOrder(inputOrder);

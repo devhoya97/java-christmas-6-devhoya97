@@ -1,9 +1,8 @@
 package christmas.domain;
 
-import static org.assertj.core.api.Assertions.assertThatThrownBy;
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
-import christmas.domain.menu.Menu;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -35,7 +34,7 @@ class OrderItemTest {
         OrderItem orderItem = new OrderItem("양송이수프", 3);
         long expectedPrice = 18_000;
         // when
-        long price =  orderItem.calculatePrice();
+        long price = orderItem.calculatePrice();
         // then
         assertThat(price).isEqualTo(expectedPrice);
     }

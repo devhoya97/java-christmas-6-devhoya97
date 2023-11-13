@@ -11,6 +11,7 @@ public class VisitDate {
     private static final int SUNDAY_REMAIN = 3;
     private static final int WEEK_SIZE = 7;
     private final int visitDate;
+
     public VisitDate(int visitDate) {
         validateDecember(visitDate);
         this.visitDate = visitDate;

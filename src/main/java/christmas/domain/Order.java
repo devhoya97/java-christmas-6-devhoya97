@@ -57,7 +57,7 @@ public class Order {
             if (orderItem.isDessert()) {
                 dessertCount = orderItem.accumulateCount(dessertCount);
             }
-         }
+        }
         return dessertCount;
     }
 
