@@ -1,4 +1,4 @@
-package christmas.domain.menu;
+package christmas.domain;
 
 public enum Menu {
     MUSHROOM_SOUP("애피타이저", "양송이수프", 6_000),

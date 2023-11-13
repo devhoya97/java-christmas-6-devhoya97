@@ -3,7 +3,6 @@ package christmas.domain;
 
 import static christmas.domain.utils.ErrorMessage.INVALID_ORDER_ERROR;
 
-import christmas.domain.menu.Menu;
 import java.util.Objects;
 
 public class OrderItem {
@@ -65,10 +64,9 @@ public class OrderItem {
 
     @Override
     public boolean equals(Object other) {
-        if (!(other instanceof OrderItem)) {
+        if (!(other instanceof OrderItem otherOrderItem)) {
             return false;
         }
-        OrderItem otherOrderItem = (OrderItem) other;
 
         return menu == otherOrderItem.menu;
     }
