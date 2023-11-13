@@ -85,6 +85,7 @@ public class BenefitManager {
         return benefitResult.containsKey(Benefit.GIFT_GIVING);
     }
 
+    // OutputView를 위한 getter
     public Map<Benefit, Long> getBenefitResult() {
         return Collections.unmodifiableMap(benefitResult);
     }
