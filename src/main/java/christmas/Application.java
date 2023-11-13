@@ -1,7 +1,7 @@
 package christmas;
 
-import christmas.domain.order.Order;
 import christmas.domain.VisitDate;
+import christmas.domain.order.Order;
 import christmas.domain.promotion.Badge;
 import christmas.domain.promotion.BenefitManager;
 import christmas.view.InputView;

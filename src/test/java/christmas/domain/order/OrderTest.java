@@ -3,8 +3,6 @@ package christmas.domain.order;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
-import christmas.domain.order.Order;
-import christmas.domain.order.OrderItem;
 import java.util.List;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;

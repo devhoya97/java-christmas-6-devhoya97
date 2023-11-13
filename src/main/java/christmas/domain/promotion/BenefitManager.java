@@ -1,8 +1,8 @@
 package christmas.domain.promotion;
 
+import christmas.domain.VisitDate;
 import christmas.domain.order.Menu;
 import christmas.domain.order.Order;
-import christmas.domain.VisitDate;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
