@@ -41,7 +41,7 @@ class BenefitManagerTest {
     @DisplayName("전체 할인 금액을 계산한다.")
     @ParameterizedTest
     @CsvSource({"1,11_115", "3,10_292", "27,8_092"})
-    void calculateTotalDiscountedPrice(int day, long expectedResult) {
+    void calculateTotalDiscount(int day, long expectedResult) {
         // given
         OrderItem tapas = new OrderItem("타파스", 1);
         OrderItem christmasPasta = new OrderItem("크리스마스파스타", 2);
@@ -59,7 +59,7 @@ class BenefitManagerTest {
     @DisplayName("총혜택 금액을 계산한다.")
     @ParameterizedTest
     @CsvSource({"1,36_115", "3,35_292", "27,33_092"})
-    void calculateTotalDiscount(int day, long expectedResult) {
+    void calculateTotalBenefit(int day, long expectedResult) {
         // given
         OrderItem tapas = new OrderItem("타파스", 1);
         OrderItem christmasPasta = new OrderItem("크리스마스파스타", 2);
