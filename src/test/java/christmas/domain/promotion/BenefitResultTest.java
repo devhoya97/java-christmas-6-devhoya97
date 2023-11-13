@@ -11,7 +11,7 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 
-class BenefitManagerTest {
+class BenefitResultTest {
 
     @DisplayName("모든 할인 혜택을 적용한 결과를 반환한다.")
     @ParameterizedTest
@@ -27,9 +27,9 @@ class BenefitManagerTest {
         OrderItem zeroCoke = new OrderItem("제로콜라", 4);
         Order order = new Order(List.of(tapas, christmasPasta, seafoodPasta, chocoCake, iceCream, zeroCoke));
         VisitDate visitDate = new VisitDate(day);
-        BenefitManager benefitManager = new BenefitManager(visitDate, order);
+        BenefitResult benefitResult = new BenefitResult(visitDate, order);
         // when
-        Map<Benefit, Long> discountResult = benefitManager.getBenefitResult();
+        Map<Benefit, Long> discountResult = benefitResult.getResult();
         // then
         assertThat(discountResult.getOrDefault(Benefit.CHRISTMAS_DISCOUNT, 0L)).isEqualTo(expectedChristmasDiscount);
         assertThat(discountResult.getOrDefault(Benefit.WEEK_DAY_DISCOUNT, 0L)).isEqualTo(expectedWeekDayDiscount);
@@ -51,9 +51,9 @@ class BenefitManagerTest {
         OrderItem zeroCoke = new OrderItem("제로콜라", 4);
         Order order = new Order(List.of(tapas, christmasPasta, seafoodPasta, chocoCake, iceCream, zeroCoke));
         VisitDate visitDate = new VisitDate(day);
-        BenefitManager benefitManager = new BenefitManager(visitDate, order);
+        BenefitResult benefitResult = new BenefitResult(visitDate, order);
         // when, then
-        assertThat(benefitManager.calculateTotalDiscount()).isEqualTo(expectedResult);
+        assertThat(benefitResult.calculateTotalDiscount()).isEqualTo(expectedResult);
     }
 
     @DisplayName("총혜택 금액을 계산한다.")
@@ -69,9 +69,9 @@ class BenefitManagerTest {
         OrderItem zeroCoke = new OrderItem("제로콜라", 4);
         Order order = new Order(List.of(tapas, christmasPasta, seafoodPasta, chocoCake, iceCream, zeroCoke));
         VisitDate visitDate = new VisitDate(day);
-        BenefitManager benefitManager = new BenefitManager(visitDate, order);
+        BenefitResult benefitResult = new BenefitResult(visitDate, order);
         // when, then
-        assertThat(benefitManager.calculateTotalBenefit()).isEqualTo(expectedResult);
+        assertThat(benefitResult.calculateTotalBenefit()).isEqualTo(expectedResult);
     }
 
     @DisplayName("증정 선물을 받았는지 확인한다.")
@@ -82,8 +82,8 @@ class BenefitManagerTest {
         OrderItem christmasPasta = new OrderItem("크리스마스파스타", count);
         Order order = new Order(List.of(christmasPasta));
         VisitDate visitDate = new VisitDate(3);
-        BenefitManager benefitManager = new BenefitManager(visitDate, order);
+        BenefitResult benefitResult = new BenefitResult(visitDate, order);
         // when, then
-        assertThat(benefitManager.hasGift()).isEqualTo(expectedResult);
+        assertThat(benefitResult.hasGift()).isEqualTo(expectedResult);
     }
 }

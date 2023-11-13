@@ -3,7 +3,7 @@ package christmas.view;
 import christmas.domain.order.Order;
 import christmas.domain.order.OrderItem;
 import christmas.domain.promotion.Benefit;
-import christmas.domain.promotion.BenefitManager;
+import christmas.domain.promotion.BenefitResult;
 import java.text.DecimalFormat;
 import java.util.Map;
 import java.util.Map.Entry;
@@ -20,17 +20,17 @@ public class OutputView {
     private static final String NOTHING = "없음";
     private final static long NO_BENEFIT = 0L;
 
-    public static void printResult(String visitDate, Order order, BenefitManager benefitManager, String badgeName) {
+    public static void printResult(String visitDate, Order order, BenefitResult benefitResult, String badgeName) {
         long totalPrice = order.calculateTotalPrice();
         StringBuilder totalMessage = new StringBuilder();
 
         addGuideMessage(totalMessage, visitDate);
         addOrderItemsSummary(totalMessage, order);
         addTotalPriceMessage(totalMessage, totalPrice);
-        addGiftMenuMessage(totalMessage, benefitManager.hasGift());
-        addEachBenefitMessage(totalMessage, benefitManager.getBenefitResult());
-        addTotalBenefitMessage(totalMessage, benefitManager.calculateTotalBenefit());
-        addDiscountedTotalPriceMessage(totalMessage, totalPrice - benefitManager.calculateTotalDiscount());
+        addGiftMenuMessage(totalMessage, benefitResult.hasGift());
+        addEachBenefitMessage(totalMessage, benefitResult.getResult());
+        addTotalBenefitMessage(totalMessage, benefitResult.calculateTotalBenefit());
+        addDiscountedTotalPriceMessage(totalMessage, totalPrice - benefitResult.calculateTotalDiscount());
         addBadgeMessage(totalMessage, badgeName);
 
         System.out.println(totalMessage);

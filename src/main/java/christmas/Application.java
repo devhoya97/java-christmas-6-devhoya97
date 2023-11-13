@@ -3,7 +3,7 @@ package christmas;
 import christmas.domain.VisitDate;
 import christmas.domain.order.Order;
 import christmas.domain.promotion.Badge;
-import christmas.domain.promotion.BenefitManager;
+import christmas.domain.promotion.BenefitResult;
 import christmas.view.InputView;
 import christmas.view.OutputView;
 
@@ -12,9 +12,9 @@ public class Application {
         VisitDate visitDate = InputView.readDate();
         Order order = InputView.readOrder();
 
-        BenefitManager benefitManager = new BenefitManager(visitDate, order);
-        Badge badge = Badge.getBadge(benefitManager.calculateTotalBenefit());
+        BenefitResult benefitResult = new BenefitResult(visitDate, order);
+        Badge badge = Badge.getBadge(benefitResult.calculateTotalBenefit());
 
-        OutputView.printResult(visitDate.toString(), order, benefitManager, badge.getName());
+        OutputView.printResult(visitDate.toString(), order, benefitResult, badge.getName());
     }
 }
