@@ -71,4 +71,15 @@ class OrderItemTest {
         assertThat(orderItem.isDessert()).isEqualTo(true);
         assertThat(otherOrderItem.isDessert()).isEqualTo(false);
     }
+
+    @DisplayName("음료 메뉴 주문인지 알려준다.")
+    @Test
+    void isDrink() {
+        // given
+        OrderItem orderItem = new OrderItem("제로콜라", 1);
+        OrderItem otherOrderItem = new OrderItem("크리스마스파스타", 1);
+        // when, then
+        assertThat(orderItem.isDrink()).isEqualTo(true);
+        assertThat(otherOrderItem.isDrink()).isEqualTo(false);
+    }
 }
