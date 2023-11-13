@@ -1,10 +1,10 @@
 package christmas.domain.promotion;
 
 public enum Badge {
-    NOTING("없음", 0),
-    STAR("별", 5_000),
+    SANTA("산타", 20_000),
     TREE("트리", 10_000),
-    SANTA("산타", 20_000);
+    STAR("별", 5_000),
+    NOTING("없음", 0);
 
     private final String name;
     private final long requiredTotalBenefit;
@@ -23,14 +23,10 @@ public enum Badge {
     }
 
     public static Badge get(long totalBenefit) {
-        if (totalBenefit >= SANTA.getRequiredTotalBenefit()) {
-            return SANTA;
-        }
-        if (totalBenefit >= TREE.getRequiredTotalBenefit()) {
-            return TREE;
-        }
-        if (totalBenefit >= STAR.getRequiredTotalBenefit()) {
-            return STAR;
+        for (Badge badge : Badge.values()) {
+            if (totalBenefit >= badge.requiredTotalBenefit) {
+                return badge;
+            }
         }
         return NOTING;
     }
