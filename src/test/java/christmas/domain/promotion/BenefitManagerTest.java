@@ -1,9 +1,9 @@
-package christmas.domain.promotion.benefit;
+package christmas.domain.promotion;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-import christmas.domain.Order;
-import christmas.domain.OrderItem;
+import christmas.domain.order.Order;
+import christmas.domain.order.OrderItem;
 import christmas.domain.VisitDate;
 import java.util.List;
 import java.util.Map;

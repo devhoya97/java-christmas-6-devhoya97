@@ -4,8 +4,8 @@ import static christmas.domain.utils.ErrorMessage.INVALID_DATE_ERROR;
 import static christmas.domain.utils.ErrorMessage.INVALID_ORDER_ERROR;
 
 import camp.nextstep.edu.missionutils.Console;
-import christmas.domain.Order;
-import christmas.domain.OrderItem;
+import christmas.domain.order.Order;
+import christmas.domain.order.OrderItem;
 import christmas.domain.VisitDate;
 import java.util.ArrayList;
 import java.util.List;

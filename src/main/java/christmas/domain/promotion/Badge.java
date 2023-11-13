@@ -1,4 +1,4 @@
-package christmas.domain.promotion.badge;
+package christmas.domain.promotion;
 
 public enum Badge {
     NOTING("없음", 0),
@@ -20,5 +20,18 @@ public enum Badge {
 
     public long getRequiredTotalBenefit() {
         return requiredTotalBenefit;
+    }
+
+    public static Badge getBadge(long totalBenefit) {
+        if (totalBenefit >= SANTA.getRequiredTotalBenefit()) {
+            return SANTA;
+        }
+        if (totalBenefit >= TREE.getRequiredTotalBenefit()) {
+            return TREE;
+        }
+        if (totalBenefit >= STAR.getRequiredTotalBenefit()) {
+            return STAR;
+        }
+        return NOTING;
     }
 }

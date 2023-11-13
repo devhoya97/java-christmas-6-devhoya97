@@ -1,4 +1,4 @@
-package christmas.domain;
+package christmas.domain.order;
 
 import static christmas.domain.utils.ErrorMessage.INVALID_ORDER_ERROR;
 

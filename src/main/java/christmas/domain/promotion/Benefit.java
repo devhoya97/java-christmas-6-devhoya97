@@ -1,4 +1,4 @@
-package christmas.domain.promotion.benefit;
+package christmas.domain.promotion;
 
 public enum Benefit {
     CHRISTMAS_DISCOUNT("크리스마스 디데이 할인"),

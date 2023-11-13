@@ -1,10 +1,10 @@
 package christmas.view;
 
-import christmas.domain.Order;
-import christmas.domain.OrderItem;
-import christmas.domain.promotion.badge.Badge;
-import christmas.domain.promotion.benefit.Benefit;
-import christmas.domain.promotion.benefit.BenefitManager;
+import christmas.domain.order.Order;
+import christmas.domain.order.OrderItem;
+import christmas.domain.promotion.Badge;
+import christmas.domain.promotion.Benefit;
+import christmas.domain.promotion.BenefitManager;
 import java.text.DecimalFormat;
 import java.util.Map;
 import java.util.Map.Entry;
