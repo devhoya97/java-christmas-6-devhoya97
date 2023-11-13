@@ -10,7 +10,7 @@ import java.util.Set;
 public class Order {
     private static final int MAX_TOTAL_COUNT = 20;
     private static final int NO_COUNT = 0;
-    List<OrderItem> orderItems;
+    private final List<OrderItem> orderItems;
 
     public Order(List<OrderItem> orderItems) {
         validateTotalCount(orderItems);
