@@ -81,6 +81,10 @@ public class BenefitManager {
                 .sum();
     }
 
+    public boolean hasGift() {
+        return benefitResult.containsKey(Benefit.GIFT_GIVING);
+    }
+
     public Map<Benefit, Long> getBenefitResult() {
         return Collections.unmodifiableMap(benefitResult);
     }

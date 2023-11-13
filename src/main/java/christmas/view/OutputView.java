@@ -27,7 +27,7 @@ public class OutputView {
         addGuideMessage(totalMessage, visitDate);
         addOrderItemsSummary(totalMessage, order);
         addTotalPriceMessage(totalMessage, order.calculateTotalPrice());
-        addGiftMenuMessage(totalMessage, benefitResult);
+        addGiftMenuMessage(totalMessage, benefitManager.hasGift());
         addEachBenefitMessage(totalMessage, benefitResult);
         addTotalBenefitMessage(totalMessage, benefitManager.calculateTotalBenefit());
         addDiscountedTotalPriceMessage(totalMessage, benefitManager.calculateDiscountedTotalPrice());
@@ -68,9 +68,9 @@ public class OutputView {
         return thousandSeparator.format(price);
     }
 
-    private static void addGiftMenuMessage(StringBuilder totalMessage, Map<Benefit, Long> benefitResult) {
+    private static void addGiftMenuMessage(StringBuilder totalMessage, boolean hasGift) {
         totalMessage.append("<증정 메뉴>").append(NEW_LINE);
-        if (benefitResult.containsKey(Benefit.GIFT_GIVING)) {
+        if (hasGift) {
             totalMessage.append(Benefit.GIFT_GIVING.getGift()).append(DOUBLE_NEW_LINE);
             return;
         }

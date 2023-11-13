@@ -74,4 +74,17 @@ class BenefitManagerTest {
         // when, then
         assertThat(benefitManager.calculateTotalBenefit()).isEqualTo(expectedResult);
     }
+
+    @DisplayName("증정 선물을 받았는지 확인한다.")
+    @ParameterizedTest
+    @CsvSource({"1,false", "20,true"})
+    void hasGift(int count, boolean expectedResult) {
+        // given
+        OrderItem christmasPasta = new OrderItem("크리스마스파스타", count);
+        Order order = new Order(List.of(christmasPasta));
+        VisitDate visitDate = new VisitDate(3);
+        BenefitManager benefitManager = new BenefitManager(visitDate, order);
+        // when, then
+        assertThat(benefitManager.hasGift()).isEqualTo(expectedResult);
+    }
 }
