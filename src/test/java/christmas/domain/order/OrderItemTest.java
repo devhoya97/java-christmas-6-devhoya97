@@ -39,15 +39,15 @@ class OrderItemTest {
         assertThat(price).isEqualTo(expectedPrice);
     }
 
-    @DisplayName("디저트 메뉴 주문인지 알려준다.")
+    @DisplayName("주문 받은 메뉴의 개수를 외부 값과 합하여 반환한다.")
     @Test
-    void isDessert() {
+    void accumulateCount() {
         // given
-        OrderItem orderItem = new OrderItem("초코케이크", 1);
-        OrderItem otherOrderItem = new OrderItem("크리스마스파스타", 1);
+        OrderItem orderItem = new OrderItem("양송이수프", 3);
+        int countBeforeAccumulation = 5;
+        int expectedResult = 8;
         // when, then
-        assertThat(orderItem.isDessert()).isEqualTo(true);
-        assertThat(otherOrderItem.isDessert()).isEqualTo(false);
+        assertThat(orderItem.accumulateCount(countBeforeAccumulation)).isEqualTo(expectedResult);
     }
 
     @DisplayName("메인 메뉴 주문인지 알려준다.")
@@ -59,5 +59,16 @@ class OrderItemTest {
         // when, then
         assertThat(orderItem.isMain()).isEqualTo(true);
         assertThat(otherOrderItem.isMain()).isEqualTo(false);
+    }
+
+    @DisplayName("디저트 메뉴 주문인지 알려준다.")
+    @Test
+    void isDessert() {
+        // given
+        OrderItem orderItem = new OrderItem("초코케이크", 1);
+        OrderItem otherOrderItem = new OrderItem("크리스마스파스타", 1);
+        // when, then
+        assertThat(orderItem.isDessert()).isEqualTo(true);
+        assertThat(otherOrderItem.isDessert()).isEqualTo(false);
     }
 }
