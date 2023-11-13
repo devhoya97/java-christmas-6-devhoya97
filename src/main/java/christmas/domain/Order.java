@@ -9,6 +9,7 @@ import java.util.Set;
 
 public class Order {
     private static final int MAX_TOTAL_COUNT = 20;
+    private static final int NO_COUNT = 0;
     List<OrderItem> orderItems;
 
     public Order(List<OrderItem> orderItems) {
@@ -19,7 +20,7 @@ public class Order {
     }
 
     private void validateTotalCount(List<OrderItem> orderItems) {
-        int totalCount = 0;
+        int totalCount = NO_COUNT;
         for (OrderItem orderItem : orderItems) {
             totalCount = orderItem.accumulateCount(totalCount);
         }
@@ -29,10 +30,10 @@ public class Order {
     }
 
     private void validateNotOnlyDrink(List<OrderItem> orderItems) {
-        long notDrinkCount = orderItems.stream()
+        List<OrderItem> notDrinkOrderItems = orderItems.stream()
                 .filter(orderItem -> !(orderItem.isDrink()))
-                .count();
-        if (notDrinkCount == 0) {
+                .toList();
+        if (notDrinkOrderItems.isEmpty()) {
             throw new IllegalArgumentException(INVALID_ORDER_ERROR);
         }
     }
@@ -51,7 +52,7 @@ public class Order {
     }
 
     public int countDesserts() {
-        int dessertCount = 0;
+        int dessertCount = NO_COUNT;
         for (OrderItem orderItem : orderItems) {
             if (orderItem.isDessert()) {
                 dessertCount = orderItem.accumulateCount(dessertCount);
@@ -61,7 +62,7 @@ public class Order {
     }
 
     public int countMains() {
-        int mainCount = 0;
+        int mainCount = NO_COUNT;
         for (OrderItem orderItem : orderItems) {
             if (orderItem.isMain()) {
                 mainCount = orderItem.accumulateCount(mainCount);
@@ -70,6 +71,7 @@ public class Order {
         return mainCount;
     }
 
+    // OutputView를 위한 getter
     public List<OrderItem> getOrderItems() {
         return Collections.unmodifiableList(orderItems);
     }
