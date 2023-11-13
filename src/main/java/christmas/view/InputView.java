@@ -64,7 +64,10 @@ public class InputView {
     }
 
     private static OrderItem organizeOrderItem(String menuNameWithCount) {
-        String[] menuNameAndCount = menuNameWithCount.split(MENU_NAME_COUNT_DELIMITER, MENU_NAME_AND_COUNT_ARRAY_SIZE);
+        String[] menuNameAndCount = menuNameWithCount.split(MENU_NAME_COUNT_DELIMITER);
+        if (menuNameAndCount.length != MENU_NAME_AND_COUNT_ARRAY_SIZE) {
+            throw new IllegalArgumentException(INVALID_ORDER_ERROR);
+        }
 
         String menuName = menuNameAndCount[MENU_NAME_INDEX].trim();
         String inputCount = menuNameAndCount[COUNT_INDEX].trim();
