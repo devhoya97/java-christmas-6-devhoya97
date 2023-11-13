@@ -84,7 +84,7 @@ public class BenefitResult {
     }
 
     // OutputView를 위한 getter
-    public Map<Benefit, Long> getResult() {
+    public Map<Benefit, Long> get() {
         return Collections.unmodifiableMap(result);
     }
 }

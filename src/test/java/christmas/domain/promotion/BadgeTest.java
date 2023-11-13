@@ -13,7 +13,7 @@ class BadgeTest {
     @CsvSource({"3_000,없음", "5_000,별", "10_000,트리", "20_000,산타"})
     void getBadge(long totalBenefit, String expectedResult) {
         // given
-        Badge badge = Badge.getBadge(totalBenefit);
+        Badge badge = Badge.get(totalBenefit);
         // when, then
         assertThat(badge.getName()).isEqualTo(expectedResult);
     }

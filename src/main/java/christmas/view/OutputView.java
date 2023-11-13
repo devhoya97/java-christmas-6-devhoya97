@@ -28,7 +28,7 @@ public class OutputView {
         addOrderItemsSummary(totalMessage, order);
         addTotalPriceMessage(totalMessage, totalPrice);
         addGiftMenuMessage(totalMessage, benefitResult.hasGift());
-        addEachBenefitMessage(totalMessage, benefitResult.getResult());
+        addEachBenefitMessage(totalMessage, benefitResult.get());
         addTotalBenefitMessage(totalMessage, benefitResult.calculateTotalBenefit());
         addFinalPriceMessage(totalMessage, totalPrice - benefitResult.calculateTotalDiscount());
         addBadgeMessage(totalMessage, badgeName);

@@ -22,7 +22,7 @@ public enum Badge {
         return requiredTotalBenefit;
     }
 
-    public static Badge getBadge(long totalBenefit) {
+    public static Badge get(long totalBenefit) {
         if (totalBenefit >= SANTA.getRequiredTotalBenefit()) {
             return SANTA;
         }

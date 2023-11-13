@@ -29,7 +29,7 @@ class BenefitResultTest {
         VisitDate visitDate = new VisitDate(day);
         BenefitResult benefitResult = new BenefitResult(visitDate, order);
         // when
-        Map<Benefit, Long> discountResult = benefitResult.getResult();
+        Map<Benefit, Long> discountResult = benefitResult.get();
         // then
         assertThat(discountResult.getOrDefault(Benefit.CHRISTMAS_DISCOUNT, 0L)).isEqualTo(expectedChristmasDiscount);
         assertThat(discountResult.getOrDefault(Benefit.WEEK_DAY_DISCOUNT, 0L)).isEqualTo(expectedWeekDayDiscount);

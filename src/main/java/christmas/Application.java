@@ -13,7 +13,7 @@ public class Application {
         Order order = InputView.readOrder();
 
         BenefitResult benefitResult = new BenefitResult(visitDate, order);
-        Badge badge = Badge.getBadge(benefitResult.calculateTotalBenefit());
+        Badge badge = Badge.get(benefitResult.calculateTotalBenefit());
 
         OutputView.printResult(visitDate.toString(), order, benefitResult, badge.getName());
     }
