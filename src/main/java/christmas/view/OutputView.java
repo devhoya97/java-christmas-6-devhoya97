@@ -20,15 +20,15 @@ public class OutputView {
     private final static String MONEY_UNIT = "원";
     private static final String NOTHING = "없음";
     private final static long NO_BENEFIT = 0L;
+
     public static void printResult(String visitDate, Order order, BenefitManager benefitManager, Badge badge) {
-        Map<Benefit, Long> benefitResult = benefitManager.getBenefitResult();
         StringBuilder totalMessage = new StringBuilder();
 
         addGuideMessage(totalMessage, visitDate);
         addOrderItemsSummary(totalMessage, order);
         addTotalPriceMessage(totalMessage, order.calculateTotalPrice());
         addGiftMenuMessage(totalMessage, benefitManager.hasGift());
-        addEachBenefitMessage(totalMessage, benefitResult);
+        addEachBenefitMessage(totalMessage, benefitManager.getBenefitResult());
         addTotalBenefitMessage(totalMessage, benefitManager.calculateTotalBenefit());
         addDiscountedTotalPriceMessage(totalMessage, benefitManager.calculateDiscountedTotalPrice());
         addBadgeMessage(totalMessage, badge);
@@ -88,8 +88,7 @@ public class OutputView {
                     .append(BENEFIT_DELIMITER)
                     .append(MINUS)
                     .append(getThousandFormatPrice(eachBenefit.getValue()))
-                    .append(MONEY_UNIT)
-                    .append(NEW_LINE);
+                    .append(MONEY_UNIT).append(NEW_LINE);
         }
         totalMessage.append(NEW_LINE);
     }
