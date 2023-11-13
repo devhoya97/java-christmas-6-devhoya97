@@ -21,7 +21,7 @@ public class OutputView {
     private static final String NOTHING = "없음";
     private final static long NO_BENEFIT = 0L;
 
-    public static void printResult(String visitDate, Order order, BenefitManager benefitManager, Badge badge) {
+    public static void printResult(String visitDate, Order order, BenefitManager benefitManager, String badgeName) {
         StringBuilder totalMessage = new StringBuilder();
 
         addGuideMessage(totalMessage, visitDate);
@@ -31,7 +31,7 @@ public class OutputView {
         addEachBenefitMessage(totalMessage, benefitManager.getBenefitResult());
         addTotalBenefitMessage(totalMessage, benefitManager.calculateTotalBenefit());
         addDiscountedTotalPriceMessage(totalMessage, benefitManager.calculateDiscountedTotalPrice());
-        addBadgeMessage(totalMessage, badge);
+        addBadgeMessage(totalMessage, badgeName);
 
         System.out.println(totalMessage);
     }
@@ -115,9 +115,9 @@ public class OutputView {
                 .append(DOUBLE_NEW_LINE);
     }
 
-    private static void addBadgeMessage(StringBuilder totalMessage, Badge badge) {
+    private static void addBadgeMessage(StringBuilder totalMessage, String badgeName) {
         totalMessage.append("<12월 이벤트 배지>")
                 .append(NEW_LINE)
-                .append(badge.getName());
+                .append(badgeName);
     }
 }

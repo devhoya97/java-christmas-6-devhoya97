@@ -15,6 +15,6 @@ public class Application {
         BenefitManager benefitManager = new BenefitManager(visitDate, order);
         Badge badge = Badge.getBadge(benefitManager.calculateTotalBenefit());
 
-        OutputView.printResult(visitDate.toString(), order, benefitManager, badge);
+        OutputView.printResult(visitDate.toString(), order, benefitManager, badge.getName());
     }
 }
