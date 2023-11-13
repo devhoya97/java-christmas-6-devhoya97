@@ -67,7 +67,6 @@ public class OrderItem {
         if (!(other instanceof OrderItem otherOrderItem)) {
             return false;
         }
-
         return menu == otherOrderItem.menu;
     }
 
