@@ -94,4 +94,16 @@ class OrderItemTest {
         assertThat(orderItem.equals(otherOrderItem)).isEqualTo(true);
         assertThat(orderItem.equals(anotherOrderItem)).isEqualTo(false);
     }
+
+    @DisplayName("같은 메뉴면, 같은 해시코드를 갖는다.")
+    @Test
+    void gethashCode() {
+        // given
+        OrderItem orderItem = new OrderItem("바비큐립", 1);
+        OrderItem otherOrderItem = new OrderItem("바비큐립", 2);
+        OrderItem anotherOrderItem = new OrderItem("제로콜라", 1);
+        // when, then
+        assertThat(orderItem.hashCode()).isEqualTo(otherOrderItem.hashCode());
+        assertThat(orderItem.hashCode()).isNotEqualTo(anotherOrderItem.hashCode());
+    }
 }
