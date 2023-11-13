@@ -17,10 +17,9 @@ public class BenefitManager {
     private static final long NO_COUNT = 0;
 
     private final Map<Benefit, Long> benefitResult = new HashMap<>();
-    private final long totalPrice;
 
     public BenefitManager(VisitDate visitDate, Order order) {
-        totalPrice = order.calculateTotalPrice();
+        long totalPrice = order.calculateTotalPrice();
         if (totalPrice >= MIN_TOTAL_PRICE_FOR_DISCOUNT) {
             addChristmasDiscount(visitDate.isInChristmasPromotion(), visitDate.getDifferenceFromFirstDay());
             addWeekDayDiscount(visitDate.isInWeekDayPromotion(), order.countDesserts());
@@ -64,14 +63,13 @@ public class BenefitManager {
         benefitResult.put(Benefit.GIFT_GIVING, giftPrice);
     }
 
-    public long calculateDiscountedTotalPrice() {
+    public long calculateTotalDiscount() {
         // 증정 이벤트로 받은 혜택은 할인 후 예상 결제 금액에 영향을 미치지 않으므로 배제한다.
-        long totalDiscount = benefitResult.entrySet()
+        return benefitResult.entrySet()
                 .stream()
                 .filter(entry -> entry.getKey() != Benefit.GIFT_GIVING)
                 .mapToLong(Entry::getValue)
                 .sum();
-        return totalPrice - totalDiscount;
     }
 
     public long calculateTotalBenefit() {

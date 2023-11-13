@@ -22,14 +22,15 @@ public class OutputView {
 
     public static void printResult(String visitDate, Order order, BenefitManager benefitManager, String badgeName) {
         StringBuilder totalMessage = new StringBuilder();
+        long totalPrice = order.calculateTotalPrice();
 
         addGuideMessage(totalMessage, visitDate);
         addOrderItemsSummary(totalMessage, order);
-        addTotalPriceMessage(totalMessage, order.calculateTotalPrice());
+        addTotalPriceMessage(totalMessage, totalPrice);
         addGiftMenuMessage(totalMessage, benefitManager.hasGift());
         addEachBenefitMessage(totalMessage, benefitManager.getBenefitResult());
         addTotalBenefitMessage(totalMessage, benefitManager.calculateTotalBenefit());
-        addDiscountedTotalPriceMessage(totalMessage, benefitManager.calculateDiscountedTotalPrice());
+        addDiscountedTotalPriceMessage(totalMessage, totalPrice, benefitManager.calculateTotalDiscount());
         addBadgeMessage(totalMessage, badgeName);
 
         System.out.println(totalMessage);
@@ -106,7 +107,8 @@ public class OutputView {
                 .append(DOUBLE_NEW_LINE);
     }
 
-    private static void addDiscountedTotalPriceMessage(StringBuilder totalMessage, long discountedTotalPrice) {
+    private static void addDiscountedTotalPriceMessage(StringBuilder totalMessage, long totalPrice, long totalDiscount) {
+        long discountedTotalPrice = totalPrice - totalDiscount;
         totalMessage.append("<할인 후 예상 결제 금액>")
                 .append(NEW_LINE)
                 .append(getThousandFormatPrice(discountedTotalPrice))

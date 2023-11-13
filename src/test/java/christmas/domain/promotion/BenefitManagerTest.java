@@ -38,9 +38,9 @@ class BenefitManagerTest {
         assertThat(discountResult.getOrDefault(Benefit.GIFT_GIVING, 0L)).isEqualTo(expectedGiftBenefit);
     }
 
-    @DisplayName("할인 후 예상 결제 금액을 계산한다.")
+    @DisplayName("전체 할인 금액을 계산한다.")
     @ParameterizedTest
-    @CsvSource({"1,211_385", "3,212_208", "27,214_408"})
+    @CsvSource({"1,11_115", "3,10_292", "27,8_092"})
     void calculateTotalDiscountedPrice(int day, long expectedResult) {
         // given
         OrderItem tapas = new OrderItem("타파스", 1);
@@ -53,7 +53,7 @@ class BenefitManagerTest {
         VisitDate visitDate = new VisitDate(day);
         BenefitManager benefitManager = new BenefitManager(visitDate, order);
         // when, then
-        assertThat(benefitManager.calculateDiscountedTotalPrice()).isEqualTo(expectedResult);
+        assertThat(benefitManager.calculateTotalDiscount()).isEqualTo(expectedResult);
     }
 
     @DisplayName("총혜택 금액을 계산한다.")
