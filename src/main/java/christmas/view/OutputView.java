@@ -30,7 +30,7 @@ public class OutputView {
         addGiftMenuMessage(totalMessage, benefitResult.hasGift());
         addEachBenefitMessage(totalMessage, benefitResult.getResult());
         addTotalBenefitMessage(totalMessage, benefitResult.calculateTotalBenefit());
-        addDiscountedTotalPriceMessage(totalMessage, totalPrice - benefitResult.calculateTotalDiscount());
+        addFinalPriceMessage(totalMessage, totalPrice - benefitResult.calculateTotalDiscount());
         addBadgeMessage(totalMessage, badgeName);
 
         System.out.println(totalMessage);
@@ -107,10 +107,10 @@ public class OutputView {
                 .append(DOUBLE_NEW_LINE);
     }
 
-    private static void addDiscountedTotalPriceMessage(StringBuilder totalMessage, long discountedTotalPrice) {
+    private static void addFinalPriceMessage(StringBuilder totalMessage, long finalPrice) {
         totalMessage.append("<할인 후 예상 결제 금액>")
                 .append(NEW_LINE)
-                .append(getThousandFormatPrice(discountedTotalPrice))
+                .append(getThousandFormatPrice(finalPrice))
                 .append(MONEY_UNIT)
                 .append(DOUBLE_NEW_LINE);
     }
