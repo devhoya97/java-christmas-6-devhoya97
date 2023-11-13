@@ -2,7 +2,6 @@ package christmas.view;
 
 import christmas.domain.order.Order;
 import christmas.domain.order.OrderItem;
-import christmas.domain.promotion.Badge;
 import christmas.domain.promotion.Benefit;
 import christmas.domain.promotion.BenefitManager;
 import java.text.DecimalFormat;
