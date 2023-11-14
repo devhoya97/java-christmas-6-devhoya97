@@ -64,10 +64,10 @@ public class OrderItem {
 
     @Override
     public boolean equals(Object other) {
-        if (!(other instanceof OrderItem otherOrderItem)) {
-            return false;
+        if (other instanceof OrderItem otherOrderItem) {
+            return menu == otherOrderItem.menu;
         }
-        return menu == otherOrderItem.menu;
+        return false;
     }
 
     @Override
